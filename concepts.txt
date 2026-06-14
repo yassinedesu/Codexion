@@ -1,0 +1,23 @@
+POSIX threads — modeling independent agents (coders + a monitor) as threads, passing data in safely, and joining them cleanly.
+
+Mutexes — protecting every piece of shared state (dongle status, compile counts, the stop flag, the log) from data races.
+
+Condition variables — making threads wait efficiently for a resource instead of busy-looping, plus the predicate-loop discipline and spurious-wakeup handling.
+
+Deadlock — recognizing the dining-philosophers circular-wait (two adjacent dongles per compile) and applying an asymmetric fix that breaks one of Coffman's four conditions.
+
+Starvation & liveness — ensuring no coder is perpetually denied resources, especially under EDF.
+
+Scheduling policies — implementing and contrasting FIFO (arrival order) vs EDF (earliest deadline first) as arbitration strategies.
+
+Priority queue / min-heap — building a real data structure by hand to back the scheduler, since C has no standard one.
+
+Real-time constraints — measuring elapsed time, meeting a hard 10ms detection deadline, and understanding timing imprecision (usleep drift, gettimeofday resolution).
+
+The monitor pattern — a dedicated observer thread that detects a global condition (burnout / completion) and signals shutdown.
+
+Graceful shutdown & resource management — unblocking waiters, joining all threads, freeing all memory, no leaks.
+
+Output serialization — preventing interleaved log lines from concurrent writers.
+
+Defensive input validation — parsing and rejecting bad arguments with a deliberately weak tool (atoi).
