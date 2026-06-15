@@ -11,22 +11,19 @@
 /* ************************************************************************** */
 
 
-#include <unistd.h>
+#include "codexion.h"
 
-static int ft_atoi(const char *str)
+t_input *parsing(int argc, char **argv)
 {
-    int i;
-    int res;
+    t_input *data;
 
-    i = 0;
-    res = 0;
-    while (str[i])
-    {
-        if (str[i] >= '0' && str[i] <= '9')
-            res = (res * 10) + (str[i] - '0');
-        else
-            break;
-        i++;
-    }
-    return res;
+    data->number_of_coders = atoi(argv[1]);
+    data->time_to_burnout = atoi(argv[2]);
+    data->time_to_compile = atoi(argv[3]);
+    data->time_to_debug = atoi(argv[4]);
+    data->time_to_refactor = atoi(argv[5]);
+    data->number_of_compiles_required = atoi(argv[6]);
+    data->dongle_cooldown = atoi(argv[7]);
+    data->scheduler = argv[8];
+    return (data);
 }
