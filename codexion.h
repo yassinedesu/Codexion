@@ -16,6 +16,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <string.h>
+# include <pthread.h>
 
 typedef struct s_input
 {
@@ -29,6 +31,11 @@ typedef struct s_input
 	char	*scheduler;
 }			t_input;
 
+// parser
 t_input	*parsed_args(int argc, char **argv);
+
+// monitor
+void *mon(void *arg);
+
 
 #endif
