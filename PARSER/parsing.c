@@ -40,6 +40,9 @@ static long	ft_atol(char *str)
 	return (res * neg);
 }
 
+static	input_validator()
+{}
+
 static char	*ft_strdup(char *src)
 {
 	int		i;
