@@ -35,7 +35,7 @@ static long	ft_atol(char *str)
 		res = (res * 10) + (str[i] - '0');
 		i++;
 	}
-	if (res > MAX_INT || (res * neg) < MIN_INT)
+	if (res > MAX_INT)
 		return (-1);
 	return (res * neg);
 }
@@ -87,8 +87,6 @@ static char	*ft_strdup(char *src)
 	if (!src)
 		return (NULL);
 	len = strlen(src);
-	if (len != 3 && len != 4)
-		return (NULL);
 	res = (char *)malloc(len + 1);
 	if (!res)
 		return (NULL);
