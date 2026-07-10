@@ -40,8 +40,34 @@ static long	ft_atol(char *str)
 	return (res * neg);
 }
 
-static	input_validator()
-{}
+static	int	input_validator(int argc, char **argv)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	while (i < argc - 1)
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			if (!((argv[i][j] >= '0' && argv[i][j] <= '9') || (argv[i][j] == '-' || argv[i][j] == '+')))
+				return (-1);
+			j++;
+		}
+		i++;
+	}
+	if (!argv[i] || (strcmp(argv[i], "fifo") != 0 && strcmp(argv[i], "edf") != 0))
+		return (-1);
+	return (0);
+}
+
+static int	check_sch(char *str)
+{
+	if (!str || (strcmp(str, "fifo") != 0 && strcmp(str, "edf") != 0))
+		return (-1);
+	return (0);
+}
 
 static char	*ft_strdup(char *src)
 {
@@ -67,13 +93,6 @@ static char	*ft_strdup(char *src)
 	return (res);
 }
 
-static int	check_sch(char *str)
-{
-	if (!str || (strcmp(str, "fifo") != 0 && strcmp(str, "edf") != 0))
-		return (-1);
-	return (0);
-}
-
 t_input	*parsed_args(int argc, char **argv)
 {
 	t_input	*data;
@@ -95,7 +114,7 @@ t_input	*parsed_args(int argc, char **argv)
 			|| data->time_to_compile <= 0 || data->time_to_debug <= 0
 			|| data->time_to_refactor <= 0
 			|| data->number_of_compiles_required <= 0
-			|| data->dongle_cooldown <= 0 || check_sch(data->scheduler) == -1)
+			|| data->dongle_cooldown <= 0)
 			return (free(data->scheduler), free(data), NULL);
 	}
 	else
