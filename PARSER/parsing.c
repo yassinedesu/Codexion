@@ -29,18 +29,18 @@ static long	ft_atol(char *str)
 		i++;
 	}
 	else if (str[i] == '+')
-	{
 		i++;
-	}
 	while (str[i] && str[i] >= '0' && str[i] <= '9')
 	{
 		res = (res * 10) + (str[i] - '0');
 		i++;
 	}
+	if (res > MAX_INT || (res * neg) < MIN_INT)
+		return (-1);
 	return (res * neg);
 }
 
-static	int	input_validator(int argc, char **argv)
+static int	input_validator(int argc, char **argv)
 {
 	int	i;
 	int	j;
@@ -49,22 +49,30 @@ static	int	input_validator(int argc, char **argv)
 	while (i < argc - 1)
 	{
 		j = 0;
+		while ((argv[i][j] >= 9 && argv[i][j] <= 13) || argv[i][j] == 32)
+			j++;
+		if (argv[i][j] == '+' || argv[i][j] == '-')
+			j++;
 		while (argv[i][j])
 		{
-			if (!((argv[i][j] >= '0' && argv[i][j] <= '9') || (argv[i][j] == '-' || argv[i][j] == '+')))
+			if (!((argv[i][j] >= '0' && argv[i][j] <= '9')))
 				return (-1);
 			j++;
 		}
 		i++;
 	}
-	if (!argv[i] || (strcmp(argv[i], "fifo") != 0 && strcmp(argv[i], "edf") != 0))
+	if (!argv[i] || (strcmp(argv[i], "fifo") != 0 && strcmp(argv[i],
+				"edf") != 0))
 		return (-1);
 	return (0);
 }
 
-static int	check_sch(char *str)
+static int	check_inputs(t_input *data)
 {
-	if (!str || (strcmp(str, "fifo") != 0 && strcmp(str, "edf") != 0))
+	if (data->number_of_coders <= 0 || data->time_to_burnout <= 0
+		|| data->time_to_compile <= 0 || data->time_to_debug <= 0
+		|| data->time_to_refactor <= 0 || data->number_of_compiles_required <= 0
+		|| data->dongle_cooldown <= 0)
 		return (-1);
 	return (0);
 }
@@ -79,7 +87,7 @@ static char	*ft_strdup(char *src)
 	if (!src)
 		return (NULL);
 	len = strlen(src);
-	if(len != 3 && len != 4)
+	if (len != 3 && len != 4)
 		return (NULL);
 	res = (char *)malloc(len + 1);
 	if (!res)
@@ -102,6 +110,8 @@ t_input	*parsed_args(int argc, char **argv)
 		data = (t_input *)malloc(sizeof(t_input));
 		if (!data)
 			return (NULL);
+		if (input_validator(argc, argv) == -1)
+			return (free(data), NULL);
 		data->number_of_coders = ft_atol(argv[1]);
 		data->time_to_burnout = ft_atol(argv[2]);
 		data->time_to_compile = ft_atol(argv[3]);
@@ -110,11 +120,7 @@ t_input	*parsed_args(int argc, char **argv)
 		data->number_of_compiles_required = ft_atol(argv[6]);
 		data->dongle_cooldown = ft_atol(argv[7]);
 		data->scheduler = ft_strdup(argv[8]);
-		if (data->number_of_coders <= 0 || data->time_to_burnout <= 0
-			|| data->time_to_compile <= 0 || data->time_to_debug <= 0
-			|| data->time_to_refactor <= 0
-			|| data->number_of_compiles_required <= 0
-			|| data->dongle_cooldown <= 0)
+		if (check_inputs(data) == -1)
 			return (free(data->scheduler), free(data), NULL);
 	}
 	else
