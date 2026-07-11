@@ -33,10 +33,10 @@ static long	ft_atol(char *str)
 	while (str[i] && str[i] >= '0' && str[i] <= '9')
 	{
 		res = (res * 10) + (str[i] - '0');
+		if (res > MAX_INT)
+			return (-1);
 		i++;
 	}
-	if (res > MAX_INT)
-		return (-1);
 	return (res * neg);
 }
 
@@ -72,31 +72,9 @@ static int	check_inputs(t_input *data)
 	if (data->number_of_coders <= 0 || data->time_to_burnout <= 0
 		|| data->time_to_compile <= 0 || data->time_to_debug <= 0
 		|| data->time_to_refactor <= 0 || data->number_of_compiles_required <= 0
-		|| data->dongle_cooldown <= 0)
+		|| data->dongle_cooldown <= 0 || data->scheduler == NULL)
 		return (-1);
 	return (0);
-}
-
-static char	*ft_strdup(char *src)
-{
-	int		i;
-	int		len;
-	char	*res;
-
-	i = 0;
-	if (!src)
-		return (NULL);
-	len = strlen(src);
-	res = (char *)malloc(len + 1);
-	if (!res)
-		return (NULL);
-	while (src[i])
-	{
-		res[i] = src[i];
-		i++;
-	}
-	res[i] = '\0';
-	return (res);
 }
 
 t_input	*parsed_args(int argc, char **argv)
@@ -117,9 +95,9 @@ t_input	*parsed_args(int argc, char **argv)
 		data->time_to_refactor = ft_atol(argv[5]);
 		data->number_of_compiles_required = ft_atol(argv[6]);
 		data->dongle_cooldown = ft_atol(argv[7]);
-		data->scheduler = ft_strdup(argv[8]);
+		data->scheduler = argv[8];
 		if (check_inputs(data) == -1)
-			return (free(data->scheduler), free(data), NULL);
+			return (free(data), NULL);
 	}
 	else
 		return (NULL);
