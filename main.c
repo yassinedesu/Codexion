@@ -6,7 +6,7 @@
 /*   By: yael-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 14:54:06 by yael-kha          #+#    #+#             */
-/*   Updated: 2026/06/24 14:54:08 by yael-kha         ###   ########.fr       */
+/*   Updated: 2026/07/11 04:14:56 by yael-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	ft_free(t_input *data)
 
 int	main(int argc, char **argv)
 {
-	t_input *data;
+	t_input		*data;
+	pthread_t	thd;
 
 	data = parsed_args(argc, argv);
 	if (!data)
@@ -28,8 +29,6 @@ int	main(int argc, char **argv)
 		printf("Invalid input!\n");
 		return (1);
 	}
-
-	pthread_t thd;
 	pthread_create(&thd, NULL, mon, NULL);
 	pthread_join(thd, NULL);
 	ft_free(data);
