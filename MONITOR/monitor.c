@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yael-kha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/12 17:40:00 by yael-kha          #+#    #+#             */
-/*   Updated: 2026/06/23 21:49:11 by yael-kha         ###   ########.fr       */
+/*   Updated: 2026/07/11 04:14:02 by yael-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../codexion.h"
 
-void *mon(void *arg)
+void	*mon(void *arg)
 {
-    (void)arg;
-    printf("hi from monitor\n");
-    return (NULL);
+	(void)arg;
+	printf("hi from monitor\n");
+	return (NULL);
 }

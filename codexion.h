@@ -13,11 +13,11 @@
 #ifndef CODEXION_H
 # define CODEXION_H
 
+# include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <unistd.h>
 # include <string.h>
-# include <pthread.h>
+# include <unistd.h>
 
 # define MAX_INT 2147483647
 
@@ -34,10 +34,9 @@ typedef struct s_input
 }			t_input;
 
 // parser
-t_input	*parsed_args(int argc, char **argv);
+t_input		*parsed_args(int argc, char **argv);
 
 // monitor
-void *mon(void *arg);
-
+void		*mon(void *arg);
 
 #endif
