@@ -12,9 +12,9 @@
 
 #include "../codexion.h"
 
-void *mon(void *arg)
+void	*mon(void *arg)
 {
-    (void)arg;
-    printf("hi from monitor\n");
-    return (NULL);
+	(void)arg;
+	printf("hi from monitor\n");
+	return (NULL);
 }

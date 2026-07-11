@@ -12,27 +12,26 @@
 
 #include "codexion.h"
 
-void    ft_free(t_input *data)
+void	ft_free(t_input *data)
 {
-    free(data->scheduler);
-    free(data);
+	free(data->scheduler);
+	free(data);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    t_input *data;
+	t_input *data;
 
-    data = parsed_args(argc, argv);
-    if (!data)
-    {
-        printf("Invalid input!\n");
-        return (1);
-    }
+	data = parsed_args(argc, argv);
+	if (!data)
+	{
+		printf("Invalid input!\n");
+		return (1);
+	}
 
-    pthread_t thd;
-    pthread_create(&thd, NULL, mon, NULL);
-    pthread_join(thd, NULL);
-    ft_free(data);
-    return (0);
-
+	pthread_t thd;
+	pthread_create(&thd, NULL, mon, NULL);
+	pthread_join(thd, NULL);
+	ft_free(data);
+	return (0);
 }
