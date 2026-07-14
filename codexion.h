@@ -33,6 +33,14 @@ typedef struct s_input
 	char	*scheduler;
 }			t_input;
 
+typedef	struct s_coder
+{
+	pthread_t	id;
+	int	number_of_compiles;
+	int	last_compile_start;
+	int	burnout_time;
+}			t_coder;
+
 // parser
 t_input		*parsed_args(int argc, char **argv);
 

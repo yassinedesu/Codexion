@@ -15,6 +15,6 @@
 void	*mon(void *arg)
 {
 	(void)arg;
-	printf("hi from monitor\n");
+	printf("Burnout Detected!\n");
 	return (NULL);
 }
