@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <sys/time.h>
 
 # define MAX_INT 2147483647
 
@@ -41,6 +42,12 @@ typedef struct s_coder
 	int			last_compile_start;
 	t_input		*data;
 }				t_coder;
+
+typedef struct s_timeval
+{
+	time_t		tv_sec;
+	suseconds_t	tv_usec;
+}				t_timeval;
 
 // parser
 t_input			*parsed_args(int argc, char **argv);
