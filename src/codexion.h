@@ -23,28 +23,28 @@
 
 typedef struct s_input
 {
-	int		number_of_coders;
-	int		time_to_burnout;
-	int		time_to_compile;
-	int		time_to_debug;
-	int		time_to_refactor;
-	int		number_of_compiles_required;
-	int		dongle_cooldown;
-	char	*scheduler;
-}			t_input;
+	int			number_of_coders;
+	int			time_to_burnout;
+	int			time_to_compile;
+	int			time_to_debug;
+	int			time_to_refactor;
+	int			number_of_compiles_required;
+	int			dongle_cooldown;
+	char		*scheduler;
+}				t_input;
 
-typedef	struct s_coder
+typedef struct s_coder
 {
-	pthread_t	id;
-	int	number_of_compiles;
-	int	last_compile_start;
-	int	burnout_time;
-}			t_coder;
+	pthread_t	coder;
+	int			coder_id;
+	int			number_of_compiles;
+	int			last_compile_start;
+}				t_coder;
 
 // parser
-t_input		*parsed_args(int argc, char **argv);
+t_input			*parsed_args(int argc, char **argv);
 
 // monitor
-void		*mon(void *arg);
+void			*mon(void *arg);
 
 #endif
