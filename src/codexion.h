@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   codexion.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yael-kha <your@mail.com>                   +#+  +:+       +#+        */
+/*   By: yael-kha <yael-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/21 13:11:16 by yael-kha          #+#    #+#             */
 /*   Updated: 2026/06/21 13:11:16 by yael-kha         ###   ########.fr       */
