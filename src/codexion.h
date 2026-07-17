@@ -39,6 +39,7 @@ typedef struct s_coder
 	int			coder_id;
 	int			number_of_compiles;
 	int			last_compile_start;
+	t_input		*data;
 }				t_coder;
 
 // parser
