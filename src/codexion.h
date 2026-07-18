@@ -51,6 +51,12 @@ typedef struct	s_dongle
 	long	last_time_used;
 }				t_dongle;
 
+typedef struct	s_sim
+{
+	int	num_of_coders;
+	pthread_t	*dongles;
+}				t_sim;
+
 typedef struct s_timeval
 {
 	time_t		tv_sec;
