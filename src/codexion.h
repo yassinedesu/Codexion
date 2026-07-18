@@ -43,7 +43,7 @@ typedef struct s_coder
 	int					coder_id;
 	int					number_of_compiles;
 	long				last_compile_start;
-	t_sim				*data;
+	t_sim				*sim;
 }						t_coder;
 
 typedef struct s_dongle
@@ -59,7 +59,7 @@ typedef struct s_sim
 {
 	int					num_of_coders;
 	t_input				*params;
-	t_coder				coders;
+	t_coder				*coders;
 	t_dongle			*dongles;
 	struct timeval		t_zero;
 	pthread_mutex_t		log_mutex;
