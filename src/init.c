@@ -12,6 +12,26 @@
 
 #include "codexion.h"
 
+t_dongle	*init_dongles(t_sim *sims)
+{
+	int			i;
+	t_dongle	*dongles;
+
+	dongles = malloc(sizeof(t_dongle) * sims->params->number_of_coders);
+	if (!dongles)
+		return (NULL);
+	memset(dongles, 0, sizeof(t_dongle) * sims->params->number_of_coders);
+	i = 0;
+	while (i < sims->params->number_of_coders)
+	{
+		dongles[i].id = i;
+		dongles[i].is_taken = false;
+		dongles[i].last_time_used = 0;
+		i++;
+	}
+	return (dongles);
+}
+
 t_coder	*init_coders(t_sim *sims)
 {
 	int		i;
@@ -20,7 +40,7 @@ t_coder	*init_coders(t_sim *sims)
 	coders = malloc(sizeof(t_coder) * sims->params->number_of_coders);
 	if (!coders)
 		return (NULL);
-    memset(coders, 0, sizeof(t_coder) * sims->params->number_of_coders);
+	memset(coders, 0, sizeof(t_coder) * sims->params->number_of_coders);
 	i = 0;
 	while (i < sims->params->number_of_coders)
 	{
