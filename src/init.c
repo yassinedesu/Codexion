@@ -76,7 +76,7 @@ void	mutex_cond_destroy(t_sim *sims, int index)
 	int	i;
 
 	i = 0;
-	while (i < sims->params->number_of_coders)
+	while (i < index)
 	{
 		pthread_mutex_destroy(&sims->dongles[i].mutex);
 		pthread_cond_destroy(&sims->dongles[i].cond);
