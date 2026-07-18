@@ -37,25 +37,34 @@ typedef struct s_input
 
 typedef struct s_coder
 {
-	pthread_t	coder;
+	pthread_t	thread;
 	int			coder_id;
 	int			number_of_compiles;
 	long		last_compile_start;
-	t_input		*data;
+	t_sim		*data;
 }				t_coder;
 
 typedef struct	s_dongle
 {
-	pthread_mutex_t	dongle;
+	pthread_mutex_t	mutex;
 	int	id;
 	bool	is_taken;
 	long	last_time_used;
+	phtread_cond_t	cond; // what's a pthread_cond_t cond?
 }				t_dongle;
 
 typedef struct	s_sim
 {
-	int	num_of_coders;
-	pthread_t	*dongles;
+	int	num_of_coders; 
+	t_input	*params;
+	t_coder	coders;
+	t_dongle	*dongles;
+	struct	timeval	t_zero; 
+	pthread_mutex_t	log_mutex;
+	int	stop_flag;
+	pthread_mutex_t	stop_mutex; // why this one & the stop_flag are related to each other, the stop_flag is the signal, does that mean that stop_mutex is the one cleaning up?
+	pthread_t	monitor;
+
 }				t_sim;
 
 // parser
