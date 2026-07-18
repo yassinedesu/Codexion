@@ -63,9 +63,10 @@ t_sim	*init_sim(t_input *param)
 	inited_sim->params = param;
 	inited_sim->coders = init_coders(inited_sim);
 	if (!inited_sim->coders)
-		return (free(inited_sim), NULL);
+		return (free_all(inited_sim), NULL);
 	inited_sim->dongles = init_dongles(inited_sim);
 	if (!inited_sim->dongles)
-		return (free(inited_sim), NULL);
+		return (free_all(inited_sim), NULL);
+    gettimeofday(&inited_sim->t_zero, NULL);
 	return (inited_sim);
 }
