@@ -20,12 +20,7 @@ t_coder	*init_coders(t_sim *sims)
 	coders = malloc(sizeof(t_coder) * sims->params->number_of_coders);
 	if (!coders)
 		return (NULL);
-	i = 0;
-	while (i < sims->params->number_of_coders)
-	{
-		memset(&coders[i], NULL, sims->params->number_of_coders);
-		i++;
-	}
+    memset(coders, 0, sizeof(t_coder) * sims->params->number_of_coders);
 	i = 0;
 	while (i < sims->params->number_of_coders)
 	{
