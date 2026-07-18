@@ -70,3 +70,29 @@ t_sim	*init_sim(t_input *param)
     gettimeofday(&inited_sim->t_zero, NULL);
 	return (inited_sim);
 }
+
+t_sim   *init_mutexes(t_sim *sims)
+{
+    int i;
+    int stat;
+
+    stat = pthread_mutex_init(&sims->log_mutex, NULL);
+    if (stat != 0)
+        return (NULL);
+    stat = pthread_mutex_init(&sims->stop_mutex, NULL);
+    if (stat != 0)
+        return (NULL);
+    sims->stop_flag = 0;
+    i = 0;
+    while (i < sims->params->number_of_coders)
+    {
+        stat = pthread_mutex_init(&sims->dongles[i].mutex, NULL);
+        if (stat != 0)
+            return (NULL);
+        stat = pthread_cond_init(&sims->dongles[i].cond, NULL);
+        if (stat != 0)
+            return (NULL);
+        i++;   
+    }
+    return (sims); 
+}
