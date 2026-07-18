@@ -52,7 +52,7 @@ typedef struct s_dongle
 	int					id;
 	bool				is_taken;
 	long				last_time_used;
-	pthread_cond_t		cond; // what's a pthread_cond_t cond?
+	pthread_cond_t		cond;
 }						t_dongle;
 
 typedef struct s_sim
@@ -65,9 +65,6 @@ typedef struct s_sim
 	pthread_mutex_t		log_mutex;
 	int					stop_flag;
 	pthread_mutex_t		stop_mutex;
-	// why this one & the stop_flag are related to each other
-	// ,the stop_flag is the signal,
-	// does that mean that stop_mutex is the one cleaning up ? 
 	pthread_t			monitor;
 }						t_sim;
 
