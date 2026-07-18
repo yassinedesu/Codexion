@@ -103,7 +103,7 @@ t_sim   *init_mutexes(t_sim *sims)
 {
     int i;
 
-    if (pthread_mutex_init(&sims->log_mutex, NULL) != 0)
+    if (pthread_mutex_init(&sims->log_mutex, NULL) != 0) // does pthread_mutex_init gets executed even if inside the condition
     {
         free_all(sims);
         return (NULL);
@@ -119,9 +119,9 @@ t_sim   *init_mutexes(t_sim *sims)
     while (i < sims->params->number_of_coders)
     {
         if (pthread_mutex_init(&sims->dongles[i].mutex, NULL) != 0)
-            return (mutex_cond_destroy(sims, i, i - 1));
+            return (mutex_cond_destroy(sims, i, i - 1)); // why just returning mutex_cond_destroy
         if (pthread_cond_init(&sims->dongles[i].cond, NULL) != 0)
-            return (mutex_cond_destroy(sims, i + 1, i));
+            return (mutex_cond_destroy(sims, i + 1, i)); // why just returning mutex_cond_destroy
         i++;
     }
     return (sims);
