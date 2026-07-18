@@ -17,7 +17,7 @@ t_coder	*init_coders(t_sim *sims)
 	int		i;
 	t_coder	*coders;
 
-	coders = malloc(sizeof(t_coder *) * sims->params->number_of_coders);
+	coders = malloc(sizeof(t_coder) * sims->params->number_of_coders);
 	if (!coders)
 		return (NULL);
 	i = 0;
