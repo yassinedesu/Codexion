@@ -71,6 +71,20 @@ t_sim	*init_sim(t_input *param)
 	return (inited_sim);
 }
 
+void    mutex_cond_destroy(t_sim *sims)
+{
+    int i;
+
+    i = 0;
+    while (i < sims->params->number_of_coders)
+    {
+        pthread_mutex_destroy(&sims->dongles[i].mutex);
+        pthread_cond_destroy(&sims->dongles[i].cond);
+        i++;
+    }
+    return (NULL);
+}
+
 t_sim	*init_mutexes(t_sim *sims)
 {
 	int	i;
