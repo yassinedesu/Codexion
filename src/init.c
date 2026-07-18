@@ -52,3 +52,21 @@ t_coder	*init_coders(t_sim *sims)
 	}
 	return (coders);
 }
+
+t_sim   *init_sim(t_input *param)
+{
+    t_sim   *inited_sim;
+    int     stat;
+
+    inited_sim = malloc(sizeof(t_sim));
+    if (!inited_sim)
+        return(NULL);
+    inited_sim->params = param;
+    stat = init_coders(inited_sim);
+    if (stat != 0)
+        free(inited_sim);
+    stat = init_dongles(inited_sim);
+    if (stat != 0)
+        free(inited_sim);
+    return (inited_sim);
+}
