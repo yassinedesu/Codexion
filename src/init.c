@@ -6,7 +6,7 @@
 /*   By: yael-kha <yael-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 15:02:45 by yael-kha          #+#    #+#             */
-/*   Updated: 2026/07/18 19:52:18 by yael-kha         ###   ########.fr       */
+/*   Updated: 2026/07/18 20:11:34 by yael-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,19 @@ t_sim	*init_sim(t_input *param)
 	return (inited_sim);
 }
 
-void    mutex_cond_destroy(t_sim *sims)
+void	mutex_cond_destroy(t_sim *sims, int index)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (i < sims->params->number_of_coders)
-    {
-        pthread_mutex_destroy(&sims->dongles[i].mutex);
-        pthread_cond_destroy(&sims->dongles[i].cond);
-        i++;
-    }
-    return (NULL);
+	i = 0;
+	while (i < sims->params->number_of_coders)
+	{
+		pthread_mutex_destroy(&sims->dongles[i].mutex);
+		pthread_cond_destroy(&sims->dongles[i].cond);
+		i++;
+	}
+    free_all(sims);
+	return ;
 }
 
 t_sim	*init_mutexes(t_sim *sims)
@@ -102,10 +103,10 @@ t_sim	*init_mutexes(t_sim *sims)
 	{
 		stat = pthread_mutex_init(&sims->dongles[i].mutex, NULL);
 		if (stat != 0)
-			return (NULL);
+			return (mutex_cond_destroy(sims, i), NULL);
 		stat = pthread_cond_init(&sims->dongles[i].cond, NULL);
 		if (stat != 0)
-			return (NULL);
+			return (mutex_cond_destroy(sims, i), NULL);
 		i++;
 	}
 	return (sims);
