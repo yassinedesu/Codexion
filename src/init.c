@@ -6,7 +6,7 @@
 /*   By: yael-kha <yael-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 15:02:45 by yael-kha          #+#    #+#             */
-/*   Updated: 2026/07/17 15:02:46 by yael-kha         ###   ########.fr       */
+/*   Updated: 2026/07/18 18:09:09 by yael-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,19 @@ t_coder	*init_coders(t_sim *sims)
 	return (coders);
 }
 
-t_sim   *init_sim(t_input *param)
+t_sim	*init_sim(t_input *param)
 {
-    t_sim   *inited_sim;
+	t_sim	*inited_sim;
 
-    inited_sim = malloc(sizeof(t_sim));
-    if (!inited_sim)
-        return(NULL);
-    inited_sim->params = param;
-    inited_sim->coders = init_coders(inited_sim);
-    if (inited_sim->coders != 0)
-        return(free(inited_sim), NULL);
-    inited_sim->dongles = init_dongles(inited_sim);
-    if (inited_sim->dongles != 0)
-        return(free(inited_sim), NULL);
-    return (inited_sim);
+	inited_sim = malloc(sizeof(t_sim));
+	if (!inited_sim)
+		return (NULL);
+	inited_sim->params = param;
+	inited_sim->coders = init_coders(inited_sim);
+	if (!inited_sim->coders)
+		return (free(inited_sim), NULL);
+	inited_sim->dongles = init_dongles(inited_sim);
+	if (!inited_sim->dongles)
+		return (free(inited_sim), NULL);
+	return (inited_sim);
 }

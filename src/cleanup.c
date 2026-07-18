@@ -11,3 +11,10 @@
 /* ************************************************************************** */
 
 #include "codexion.h"
+
+void    free_all(t_sim *sims)
+{
+    free(sims->coders);
+    free(sims->dongles);
+    free(sims);
+}
