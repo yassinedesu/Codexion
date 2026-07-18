@@ -72,6 +72,6 @@ typedef struct s_sim
 t_input					*parsed_args(int argc, char **argv);
 
 // monitor
-void					*mon(void *arg);
+void					*coder_routine(void *arg);
 
 #endif

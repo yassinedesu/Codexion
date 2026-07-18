@@ -82,10 +82,10 @@ void	*mutex_cond_destroy(t_sim *sims, int index1, int index2)
 		i++;
 	}
 	i = 0;
-    while (i < index2)
+	while (i < index2)
 	{
-        pthread_cond_destroy(&sims->dongles[i].cond);
-        i++;
+		pthread_cond_destroy(&sims->dongles[i].cond);
+		i++;
 	}
 	pthread_mutex_destroy(&sims->log_mutex);
 	pthread_mutex_destroy(&sims->stop_mutex);
@@ -98,16 +98,16 @@ t_sim	*init_mutexes(t_sim *sims)
 	int	i;
 
 	if (pthread_mutex_init(&sims->log_mutex, NULL) != 0)
-		{
-            free_all(sims);
-            return (NULL);
-        }
+	{
+		free_all(sims);
+		return (NULL);
+	}
 	if (pthread_mutex_init(&sims->stop_mutex, NULL) != 0)
-		{
-            pthread_mutex_destroy(&sims->log_mutex);
-            free_all(sims);
-            return (NULL);
-        }
+	{
+		pthread_mutex_destroy(&sims->log_mutex);
+		free_all(sims);
+		return (NULL);
+	}
 	sims->stop_flag = 0;
 	i = 0;
 	while (i < sims->params->number_of_coders)
