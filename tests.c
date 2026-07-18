@@ -67,7 +67,7 @@ void *coder_routine(void *arg) {
 }
 
 int main() {
-    int n = 2; // 2 Coders, 2 Dongles
+    int n = 10; // 2 Coders, 2 Dongles
     t_sim sim;
     sim.num_coders = n;
     sim.dongles = malloc(sizeof(t_dongle) * n);
