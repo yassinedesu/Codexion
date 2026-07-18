@@ -63,10 +63,16 @@ t_sim	*init_sim(t_input *param)
 	inited_sim->params = param;
 	inited_sim->coders = init_coders(inited_sim);
 	if (!inited_sim->coders)
-		return (free_all(inited_sim), NULL);
+    {
+        free_all(inited_sim);
+		return (NULL);
+    }
 	inited_sim->dongles = init_dongles(inited_sim);
 	if (!inited_sim->dongles)
-		return (free_all(inited_sim), NULL);
+    {
+        free_all(inited_sim);
+		return (NULL);
+    }
 	gettimeofday(&inited_sim->t_zero, NULL);
 	return (inited_sim);
 }
@@ -115,7 +121,7 @@ t_sim	*init_mutexes(t_sim *sims)
 		if (pthread_mutex_init(&sims->dongles[i].mutex, NULL) != 0)
 			return (mutex_cond_destroy(sims, i, i - 1));
 		if (pthread_cond_init(&sims->dongles[i].cond, NULL) != 0)
-			return (mutex_cond_destroy(sims, i, i));
+			return (mutex_cond_destroy(sims, i + 1, i));
 		i++;
 	}
 	return (sims);
