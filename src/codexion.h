@@ -58,12 +58,6 @@ typedef struct	s_sim
 	pthread_t	*dongles;
 }				t_sim;
 
-typedef struct s_timeval
-{
-	time_t		tv_sec;
-	suseconds_t	tv_usec;
-}				t_timeval;
-
 // parser
 t_input			*parsed_args(int argc, char **argv);
 
