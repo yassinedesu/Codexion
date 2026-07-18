@@ -48,18 +48,18 @@ void *coder_routine(void *arg) {
         usleep(500000); // sleep for 0.5 seconds
     }
 
-    printf("--> Coder %d: Trying to lock Left Dongle [%d]...\n", id, left);
+    printf("--> Coder %d: Trying to lock Left Dongle [%d]...\n", id + 1, left + 1);
     pthread_mutex_lock(&sim->dongles[left].mutex);
-    printf("--> Coder %d: LOCKED Left Dongle [%d]!\n", id, left);
+    printf("--> Coder %d: LOCKED Left Dongle [%d]!\n", id + 1, left + 1);
 
-    printf("--> Coder %d: Trying to lock Right Dongle [%d]...\n", id, right);
+    printf("--> Coder %d: Trying to lock Right Dongle [%d]...\n", id + 1, right + 1);
     pthread_mutex_lock(&sim->dongles[right].mutex);
-    printf("--> Coder %d: LOCKED Right Dongle [%d]! Working for 2 seconds...\n", id, right);
+    printf("--> Coder %d: LOCKED Right Dongle [%d]! Working for 2 seconds...\n", id + 1, right + 1);
 
     // Simulate work
     sleep(2); 
     
-    printf("<-- Coder %d: Done! Unlocking Dongles [%d] and [%d].\n\n", id, left, right);
+    printf("<-- Coder %d: Done! Unlocking Dongles [%d] and [%d].\n\n", id + 1, left + 1, right + 1);
     pthread_mutex_unlock(&sim->dongles[right].mutex);
     pthread_mutex_unlock(&sim->dongles[left].mutex);
 
@@ -67,7 +67,7 @@ void *coder_routine(void *arg) {
 }
 
 int main() {
-    int n = 2; // 2 Coders, 2 Dongles
+    int n = 10; // 2 Coders, 2 Dongles
     t_sim sim;
     sim.num_coders = n;
     sim.dongles = malloc(sizeof(t_dongle) * n);
