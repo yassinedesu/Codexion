@@ -43,6 +43,20 @@ typedef struct s_coder
 	t_input		*data;
 }				t_coder;
 
+typedef struct	s_dongle
+{
+	pthread_mutex_t	dongle;
+	int	id;
+	bool	is_taken;
+	long	last_time_used;
+}				t_dongle;
+
+typedef struct	s_sim
+{
+	int	num_of_coders;
+	pthread_t	*dongles;
+}				t_sim;
+
 typedef struct s_timeval
 {
 	time_t		tv_sec;
