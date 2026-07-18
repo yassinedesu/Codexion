@@ -50,7 +50,7 @@ typedef struct	s_dongle
 	int	id;
 	bool	is_taken;
 	long	last_time_used;
-	phtread_cond_t	cond; // what's a pthread_cond_t cond?
+	pthread_cond_t	cond; // what's a pthread_cond_t cond?
 }				t_dongle;
 
 typedef struct	s_sim
