@@ -20,7 +20,7 @@ t_sim	*coder_create(t_sim *sims)
 	while (i < sims->params->number_of_coders)
 	{
 		if (pthread_create(&sims->coders[i].thread, NULL, coder_routine,
-				sims->coders) != 0)
+				sims) != 0)
 		{
 			free_all(sims);
 			return (NULL);
