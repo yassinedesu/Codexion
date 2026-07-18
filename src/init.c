@@ -82,11 +82,14 @@ void	mutex_cond_destroy(t_sim *sims, int index1, int index2)
 		i++;
 	}
 	i = 0;
-	while (i < index2)
-	{
-		pthread_cond_destroy(&sims->dongles[i].cond);
-		i++;
-	}
+    if (index2 >= 0)
+    {
+	    while (i < index2)
+	    {
+	    	pthread_cond_destroy(&sims->dongles[i].cond);
+	    	i++;
+	    }
+    }
 	pthread_mutex_destroy(&sims->log_mutex);
 	pthread_mutex_destroy(&sims->stop_mutex);
 	free_all(sims);
