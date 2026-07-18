@@ -6,7 +6,7 @@
 /*   By: yael-kha <yael-kha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/17 15:02:45 by yael-kha          #+#    #+#             */
-/*   Updated: 2026/07/18 18:09:09 by yael-kha         ###   ########.fr       */
+/*   Updated: 2026/07/18 19:52:18 by yael-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,32 +67,32 @@ t_sim	*init_sim(t_input *param)
 	inited_sim->dongles = init_dongles(inited_sim);
 	if (!inited_sim->dongles)
 		return (free_all(inited_sim), NULL);
-    gettimeofday(&inited_sim->t_zero, NULL);
+	gettimeofday(&inited_sim->t_zero, NULL);
 	return (inited_sim);
 }
 
-t_sim   *init_mutexes(t_sim *sims)
+t_sim	*init_mutexes(t_sim *sims)
 {
-    int i;
-    int stat;
+	int	i;
+	int	stat;
 
-    stat = pthread_mutex_init(&sims->log_mutex, NULL);
-    if (stat != 0)
-        return (NULL);
-    stat = pthread_mutex_init(&sims->stop_mutex, NULL);
-    if (stat != 0)
-        return (NULL);
-    sims->stop_flag = 0;
-    i = 0;
-    while (i < sims->params->number_of_coders)
-    {
-        stat = pthread_mutex_init(&sims->dongles[i].mutex, NULL);
-        if (stat != 0)
-            return (NULL);
-        stat = pthread_cond_init(&sims->dongles[i].cond, NULL);
-        if (stat != 0)
-            return (NULL);
-        i++;   
-    }
-    return (sims); 
+	stat = pthread_mutex_init(&sims->log_mutex, NULL);
+	if (stat != 0)
+		return (NULL);
+	stat = pthread_mutex_init(&sims->stop_mutex, NULL);
+	if (stat != 0)
+		return (NULL);
+	sims->stop_flag = 0;
+	i = 0;
+	while (i < sims->params->number_of_coders)
+	{
+		stat = pthread_mutex_init(&sims->dongles[i].mutex, NULL);
+		if (stat != 0)
+			return (NULL);
+		stat = pthread_cond_init(&sims->dongles[i].cond, NULL);
+		if (stat != 0)
+			return (NULL);
+		i++;
+	}
+	return (sims);
 }
