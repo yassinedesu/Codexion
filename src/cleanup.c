@@ -12,9 +12,20 @@
 
 #include "codexion.h"
 
-void	free_all(t_sim *sims)
+void	free_all(t_sim *sim)
 {
-	free(sims->coders);
-	free(sims->dongles);
-	free(sims);
+	if (!sim)
+		return ;
+	if (sim->coders)
+	{
+		free(sim->coders);
+		sim->coders = NULL;
+	}
+	if (sim->dongles)
+	{
+		free(sim->dongles);
+		sim->dongles = NULL;
+	}
+	free(sim);
 }
+	
