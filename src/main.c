@@ -12,25 +12,27 @@
 
 #include "codexion.h"
 
-void	ft_free(t_input *data)
-{
-	free(data->scheduler);
-	free(data);
-}
-
 int	main(int argc, char **argv)
 {
-	t_input		*data;
-	pthread_t	thd;
+	t_sim	*arg_parse;
 
-	data = parsed_args(argc, argv);
-	if (!data)
+	if (parsed_args(argc, argv) == NULL)
 	{
-		printf("Invalid input!\n");
-		return (1);
+		printf("Parsing has gone wrong!\n");
+		return (-1);
 	}
-	pthread_create(&thd, NULL, mon, NULL);
-	pthread_join(thd, NULL);
-	ft_free(data);
+	arg_parse = init_sim(parsed_args(argc, argv));
+	if (arg_parse != NULL)
+	{
+		printf("init_sim has failed!\n");
+		return (-1);
+	}
+	arg_parse = init_mutexes(arg_parse);
+	if (arg_parse != NULL)
+	{
+		printf("initializing mutexes has failed!\n");
+		return (-1);
+	}
+	coder_routine(arg_parse->coders);
 	return (0);
 }

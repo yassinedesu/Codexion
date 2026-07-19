@@ -83,10 +83,10 @@ void					*mutex_cond_destroy(t_sim *sims, int index1,
 							int index2);
 
 // threads.c
+void					*spawn_fail(t_sim *sims, int running_threads);
 t_sim					*coder_create(t_sim *sims);
 
 // log.c
-
 void					print_status(t_coder *coder, char *status);
 
 // coder.c
@@ -94,5 +94,8 @@ void					*coder_routine(void *arg);
 
 // time.c
 long					timestamp_calc(struct timeval t_zero);
+
+// cleanup.c
+void	free_all(t_sim *sim);
 
 #endif
