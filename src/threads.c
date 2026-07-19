@@ -12,6 +12,24 @@
 
 #include "codexion.h"
 
+void	*spawn_fail(t_sim *sims, int running_threads)
+{
+	int	j;
+
+	j = 0;
+	pthread_mutex_lock(&sims->stop_mutex);
+	sims->stop_flag = 1;
+	pthread_mutex_unlock(&sims->stop_mutex);
+	while (j < running_threads)
+	{
+		pthread_join(sims->coders[j].thread, NULL);
+		j++;
+	}
+	mutex_cond_destroy(sims, sims->params->number_of_coders,
+		sims->params->number_of_coders);
+	return (NULL);
+}
+
 t_sim	*coder_create(t_sim *sims)
 {
 	int	i;
@@ -23,20 +41,7 @@ t_sim	*coder_create(t_sim *sims)
 	{
 		if (pthread_create(&sims->coders[i].thread, NULL, coder_routine,
 				&sims->coders[i]) != 0)
-		{
-			pthread_mutex_lock(&sims->stop_mutex);
-			sims->stop_flag = 1;
-			pthread_mutex_unlock(&sims->stop_mutex);
-			j = 0;
-			while (j < i)
-			{
-				pthread_join(sims->coders[j].thread, NULL);
-				j++;
-			}
-			mutex_cond_destroy(sims, sims->params->number_of_coders,
-				sims->params->number_of_coders);
-			return (NULL);
-		}
+				return (spawn_fail(sims, i));
 		i++;
 	}
 	if (pthread_create(&sims->monitor, NULL, monitor_routine, sims) != 0)
