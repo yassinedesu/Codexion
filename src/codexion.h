@@ -76,12 +76,11 @@ t_dongle				*init_dongles(t_sim *sims);
 t_coder					*init_coders(t_sim *sims);
 t_sim					*init_sim(t_input *param);
 t_sim					*init_mutexes(t_sim *sims);
-void					*mutex_cond_destroy(t_sim *sims, int index1, int index2);
+void					*mutex_cond_destroy(t_sim *sims, int index1,
+							int index2);
 
 // threads.c
-t_sim	*coder_create(t_sim *sims);
-
-
+t_sim					*coder_create(t_sim *sims);
 
 // monitor
 void					*coder_routine(void *arg);

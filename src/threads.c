@@ -21,12 +21,11 @@ t_sim	*coder_create(t_sim *sims)
 	while (i < sims->params->number_of_coders)
 	{
 		if (pthread_create(&sims->coders[i].thread, NULL, coder_routine,
-				sims) != 0)
+				sims->coders[i]) != 0)
 		{
 			pthread_mutex_lock(&sims->stop_mutex);
 			sims->stop_flag = 1;
 			mutex_cond_destroy(sims, i, i);
-			free_all(sims);
 			return (NULL);
 		}
 		i++;
