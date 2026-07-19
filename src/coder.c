@@ -12,12 +12,15 @@
 
 #include "codexion.h"
 
-void    *coder_routine(t_sim *sims, t_coder *coder)
+void    *coder_routine(void *arg)
 {
     long    millisec;
-    pthread_mutex_lock(&sims->log_mutex);
-    millisec = timestamp_calc(sims->t_zero);
-    print("%ld %d has taken a dongle", millisec, coder->coder_id);
-    pthread_mutex_unlock(&sims->log_mutex);
-    return ;
+    t_coder *coder = (t_coder *)arg;
+    pthread_mutex_lock(&coder->sim->log_mutex);
+    millisec = timestamp_calc(coder->sim->t_zero);
+    printf("%ld %d has taken a dongle\n", millisec, coder->coder_id);
+    pthread_mutex_unlock(&coder->sim->log_mutex);
+    return (NULL);
 }
+
+void    print_status(t_coder *coder, char *status);
