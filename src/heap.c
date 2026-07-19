@@ -11,29 +11,3 @@
 /* ************************************************************************** */
 
 #include "codexion.h"
-
-void	*spawn_fail(t_sim *sims, int running_threads)
-{
-    int i;
-    int j;
-
-    i = 0;
-
-    while (i < running_threads)
-	{
-		
-			pthread_mutex_lock(&sims->stop_mutex);
-			sims->stop_flag = 1;
-			pthread_mutex_unlock(&sims->stop_mutex);
-			j = 0;
-			while (j < i)
-			{
-				pthread_join(sims->coders[j].thread, NULL);
-				j++;
-			}
-			mutex_cond_destroy(sims, sims->params->number_of_coders,
-				sims->params->number_of_coders);
-                i++;
-    }
-            return (NULL);
-}
