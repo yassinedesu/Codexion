@@ -28,4 +28,3 @@ void	free_all(t_sim *sim)
 	}
 	free(sim);
 }
-	
