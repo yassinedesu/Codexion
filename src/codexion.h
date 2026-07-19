@@ -84,7 +84,7 @@ t_sim					*coder_create(t_sim *sims);
 
 // log.c
 
-void    print_status(t_coder *coder, char *status);
+void					print_status(t_coder *coder, char *status);
 
 // coder.c
 void					*coder_routine(void *arg);

@@ -87,7 +87,7 @@ static void	handle_spawn_failure(t_sim *sim, int coders_spawned)
 	// 3. Tear down all mutexes (we know they were all successfully initialized)
 	// We pass the total number of coders to destroy everything.
 	mutex_cond_destroy(sim, sim->params->number_of_coders,
-			sim->params->number_of_coders);
+		sim->params->number_of_coders);
 }
 
 int	spawn_threads(t_sim *sim)
@@ -112,11 +112,11 @@ int	spawn_threads(t_sim *sim)
 	// Spawn the monitor thread last, so it can immediately start watching
 	// (Assuming you have a monitor_routine declared somewhere)
 	/*
-    if (pthread_create(&sim->monitor, NULL, monitor_routine, sim) != 0)
-    {
-        handle_spawn_failure(sim, sim->params->number_of_coders);
-        return (0);
-    }
-    */
+	if (pthread_create(&sim->monitor, NULL, monitor_routine, sim) != 0)
+	{
+		handle_spawn_failure(sim, sim->params->number_of_coders);
+		return (0);
+	}
+	*/
 	return (1); // 1 indicates success
 }

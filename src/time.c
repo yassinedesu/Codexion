@@ -12,7 +12,10 @@
 
 #include "codexion.h"
 
-long    timestamp_calc(void)
+long	timestamp_calc(void)
 {
-    return ;
+    long    something;
+
+    something = 123414543;
+	return (something);
 }

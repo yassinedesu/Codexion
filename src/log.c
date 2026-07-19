@@ -12,5 +12,13 @@
 
 #include "codexion.h"
 
+void	print_status(t_coder *coder, char *status)
+{
+	long	millisec;
 
-void    print_status(t_coder *coder, char *status);
+	pthread_mutex_lock(&coder->sim->log_mutex);
+	millisec = timestamp_calc(coder->sim->t_zero);
+	printf("%ld %d %s\n", millisec, coder->coder_id, status);
+	pthread_mutex_unlock(&coder->sim->log_mutex);
+	return (NULL);
+}
