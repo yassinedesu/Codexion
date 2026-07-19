@@ -1,6 +1,11 @@
+NAME = codexion
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread
-SRCS = src/main.c src/init.c src/cleanup.c src/coder.c src/dongle.c src/heap.c src/log.c src/monitor.c src/parsing.c src/sched.c src/time.c
+
+SRCS = src/main.c src/init.c src/cleanup.c src/coder.c \
+       src/dongle.c src/heap.c src/log.c src/monitor.c \
+       src/parsing.c src/sched.c src/threads.c src/time.c
+
 OBJS = $(SRCS:.c=.o)
 DEPS = $(SRCS:.c=.d)
 

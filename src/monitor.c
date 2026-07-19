@@ -17,5 +17,6 @@ void	*monitor_routine(void *arg)
 	t_sim	*sim;
 
 	sim = (t_sim *)arg;
+	printf("%d of %s", sim->params->number_of_coders, sim->params->scheduler);
 	return (NULL);
 }
