@@ -12,7 +12,7 @@
 
 #include "codexion.h"
 
-void	*coder_routine(void *arg)
+void	*mon(void *arg)
 {
 	(void)arg;
 	printf("Burnout Detected!\n");
