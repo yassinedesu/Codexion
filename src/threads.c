@@ -33,7 +33,6 @@ void	*spawn_fail(t_sim *sims, int running_threads)
 t_sim	*coder_create(t_sim *sims)
 {
 	int	i;
-	int	j;
 
 	i = 0;
 	gettimeofday(&sims->t_zero, NULL);
@@ -41,7 +40,7 @@ t_sim	*coder_create(t_sim *sims)
 	{
 		if (pthread_create(&sims->coders[i].thread, NULL, coder_routine,
 				&sims->coders[i]) != 0)
-			return (spawn_fail(sims, i));
+			return (spawn_fail(sims, sims->params->number_of_coders));
 		i++;
 	}
 	if (pthread_create(&sims->monitor, NULL, monitor_routine, sims) != 0)
