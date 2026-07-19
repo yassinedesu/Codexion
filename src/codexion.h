@@ -71,6 +71,9 @@ typedef struct s_sim
 // parsing.c
 t_input					*parsed_args(int argc, char **argv);
 
+// monitor.c
+void					*monitor_routine(void *arg);
+
 // init.c
 t_dongle				*init_dongles(t_sim *sims);
 t_coder					*init_coders(t_sim *sims);

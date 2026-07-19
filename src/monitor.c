@@ -12,9 +12,10 @@
 
 #include "codexion.h"
 
-void	*mon(void *arg)
+void	*monitor_routine(void *arg)
 {
-	(void)arg;
-	printf("Burnout Detected!\n");
+	t_sim	*sim;
+
+	sim = (t_sim *)arg;
 	return (NULL);
 }
