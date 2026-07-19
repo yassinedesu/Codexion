@@ -15,6 +15,7 @@
 t_sim	*coder_create(t_sim *sims)
 {
 	int	i;
+	int	j;
 
 	i = 0;
 	gettimeofday(&sims->t_zero, NULL);
@@ -26,10 +27,15 @@ t_sim	*coder_create(t_sim *sims)
 			pthread_mutex_lock(&sims->stop_mutex);
 			sims->stop_flag = 1;
 			pthread_mutex_unlock(&sims->stop_mutex);
-			mutex_cond_destroy(sims, i, i);
+			mutex_cond_destroy(sims, sims->params->number_of_coders, sims->params->number_of_coders);
+			j = 0;
+			while (j < i)
+			{
+				pthread_join(&sims->coders[j].thread, NULL);
+				j++;
+			}
 			return (NULL);
 		}
-		pthread_join(&sims->coders[i], NULL);
 		i++;
 	}
 	return (sims);
