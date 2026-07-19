@@ -82,7 +82,11 @@ void					*mutex_cond_destroy(t_sim *sims, int index1,
 // threads.c
 t_sim					*coder_create(t_sim *sims);
 
-// monitor
+// log.c
+
+void    print_status(t_coder *coder, char *status);
+
+// coder.c
 void					*coder_routine(void *arg);
 
 #endif

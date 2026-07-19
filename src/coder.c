@@ -22,5 +22,3 @@ void    *coder_routine(void *arg)
     pthread_mutex_unlock(&coder->sim->log_mutex);
     return (NULL);
 }
-
-void    print_status(t_coder *coder, char *status);

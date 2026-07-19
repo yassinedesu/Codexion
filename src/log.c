@@ -9,3 +9,8 @@
 /*   Updated: 2026/07/17 15:02:52 by yael-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "codexion.h"
+
+
+void    print_status(t_coder *coder, char *status);
