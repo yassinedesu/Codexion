@@ -37,7 +37,9 @@ t_sim	*coder_create(t_sim *sims)
 				sims->params->number_of_coders);
 			return (NULL);
 		}
-		if (pthread_create(&sims->monitor, NULL, monitor_routine, sims) != 0)
+		i++;
+	}
+	if (pthread_create(&sims->monitor, NULL, monitor_routine, sims) != 0)
 		{
 			pthread_mutex_lock(&sims->stop_mutex);
 			sims->stop_flag = 1;
@@ -45,7 +47,5 @@ t_sim	*coder_create(t_sim *sims)
 			pthread_join(sims->monitor, NULL);
 			return (NULL);
 		}
-		i++;
-	}
 	return (sims);
 }
