@@ -27,13 +27,13 @@ t_sim	*coder_create(t_sim *sims)
 			pthread_mutex_lock(&sims->stop_mutex);
 			sims->stop_flag = 1;
 			pthread_mutex_unlock(&sims->stop_mutex);
-			mutex_cond_destroy(sims, sims->params->number_of_coders, sims->params->number_of_coders);
 			j = 0;
 			while (j < i)
 			{
-				pthread_join(&sims->coders[j].thread, NULL);
+				pthread_join(sims->coders[j].thread, NULL);
 				j++;
 			}
+			mutex_cond_destroy(sims, sims->params->number_of_coders, sims->params->number_of_coders);
 			return (NULL);
 		}
 		i++;
