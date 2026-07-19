@@ -40,16 +40,10 @@ t_sim	*coder_create(t_sim *sims)
 	{
 		if (pthread_create(&sims->coders[i].thread, NULL, coder_routine,
 				&sims->coders[i]) != 0)
-			return (spawn_fail(sims, sims->params->number_of_coders));
+			return (spawn_fail(sims, i));
 		i++;
 	}
 	if (pthread_create(&sims->monitor, NULL, monitor_routine, sims) != 0)
-	{
-		pthread_mutex_lock(&sims->stop_mutex);
-		sims->stop_flag = 1;
-		pthread_mutex_unlock(&sims->stop_mutex);
-		pthread_join(sims->monitor, NULL);
-		return (NULL);
-	}
+		return (spawn_fail(sims, sims->params->number_of_coders));
 	return (sims);
 }
