@@ -89,4 +89,7 @@ void					print_status(t_coder *coder, char *status);
 // coder.c
 void					*coder_routine(void *arg);
 
+// time.c
+long					timestamp_calc(struct timeval t_zero);
+
 #endif

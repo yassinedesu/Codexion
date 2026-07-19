@@ -12,10 +12,14 @@
 
 #include "codexion.h"
 
-long	timestamp_calc(void)
+long	timestamp_calc(struct timeval t_zero)
 {
-    long    something;
+	long			t_zero_time;
+	long			cur_time;
+	struct timeval	current_time;
 
-    something = 123414543;
-	return (something);
+	gettimeofday(&current_time, NULL);
+	cur_time = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
+	t_zero_time = (t_zero.tv_sec * 1000) + (t_zero.tv_usec / 1000);
+	return (t_zero_time - cur_time);
 }
