@@ -60,6 +60,7 @@ t_sim	*init_sim(t_input *param)
 	inited_sim = malloc(sizeof(t_sim));
 	if (!inited_sim)
 		return (NULL);
+	memset(inited_sim, 0, sizeof(t_sim));
 	inited_sim->params = param;
 	inited_sim->coders = init_coders(inited_sim);
 	if (!inited_sim->coders)
@@ -73,7 +74,6 @@ t_sim	*init_sim(t_input *param)
         free_all(inited_sim);
 		return (NULL);
     }
-	gettimeofday(&inited_sim->t_zero, NULL);
 	return (inited_sim);
 }
 
@@ -119,7 +119,7 @@ t_sim	*init_mutexes(t_sim *sims)
 	while (i < sims->params->number_of_coders)
 	{
 		if (pthread_mutex_init(&sims->dongles[i].mutex, NULL) != 0)
-			return (mutex_cond_destroy(sims, i, i - 1));
+			return (mutex_cond_destroy(sims, i, i));
 		if (pthread_cond_init(&sims->dongles[i].cond, NULL) != 0)
 			return (mutex_cond_destroy(sims, i + 1, i));
 		i++;
