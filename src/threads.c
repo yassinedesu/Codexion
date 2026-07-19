@@ -17,6 +17,7 @@ t_sim	*coder_create(t_sim *sims)
 	int	i;
 
 	i = 0;
+	gettimeofday(&sims->t_zero, NULL);
 	while (i < sims->params->number_of_coders)
 	{
 		if (pthread_create(&sims->coders[i].thread, NULL, coder_routine,
