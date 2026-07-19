@@ -68,8 +68,20 @@ typedef struct s_sim
 	pthread_t			monitor;
 }						t_sim;
 
-// parser
+// parsing.c
 t_input					*parsed_args(int argc, char **argv);
+
+// init.c
+t_dongle				*init_dongles(t_sim *sims);
+t_coder					*init_coders(t_sim *sims);
+t_sim					*init_sim(t_input *param);
+t_sim					*init_mutexes(t_sim *sims);
+void					*mutex_cond_destroy(t_sim *sims, int index1, int index2);
+
+// threads.c
+t_sim	*coder_create(t_sim *sims);
+
+
 
 // monitor
 void					*coder_routine(void *arg);
