@@ -73,7 +73,7 @@ t_sim	*init_sim(t_input *param)
 	{
 		free_all(inited_sim);
 		return (NULL);
-    }
+	}
 	return (inited_sim);
 }
 
