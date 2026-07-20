@@ -94,8 +94,13 @@ void					*coder_routine(void *arg);
 
 // time.c
 long					timestamp_calc(struct timeval t_zero);
+void					sleep_time(long wait_time, t_sim *sim);
 
 // cleanup.c
 void					free_all(t_sim *sim);
+
+// dongles.c
+void					take_dongle(t_coder *coder, int dongle_id);
+void					drop_dongle(t_coder *coder, int dongle_id);
 
 #endif
