@@ -30,6 +30,7 @@ void	coder_refactor(t_coder *coder)
 void	coder_debug(t_coder *coder)
 {
 	print_status(coder, "is debugging");
+	sleep_time(coder->sim->params->time_to_debug, coder->sim);
 	return ;
 }
 
@@ -43,8 +44,8 @@ void	coder_all(t_coder *coder)
 	coder_compile(coder);
 	drop_dongle(coder, left_dongle);
 	drop_dongle(coder, right_dongle);
-	coder_refactor(coder);
 	coder_debug(coder);
+	coder_refactor(coder);
 }
 
 void	*coder_routine(void *arg)
