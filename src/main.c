@@ -16,6 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_input	*param;
 	t_sim	*arg_parse;
+	int		i;
 
 	param = parsed_args(argc, argv);
 	if (param == NULL)
@@ -29,12 +30,26 @@ int	main(int argc, char **argv)
 		printf("init_sim has failed!\n");
 		return (-1);
 	}
+	arg_parse = init_mutexes(arg_parse);
+	if (arg_parse == NULL)
+	{
+		printf("init_mutex has failed!\n");
+		return (-1);
+	}
 	arg_parse = coder_create(arg_parse);
 	if (arg_parse == NULL)
 	{
 		printf("coder_create has failed!\n");
 		return (-1);
 	}
-	coder_routine(arg_parse->coders);
+	i = 0;
+	while (i < arg_parse->params->number_of_coders)
+	{
+		pthread_join(arg_parse->coders[i].thread, NULL);
+		i++;
+	}
+	pthread_join(arg_parse->monitor, NULL);
+	mutex_cond_destroy(arg_parse, arg_parse->params->number_of_coders,
+		 arg_parse->params->number_of_coders);
 	return (0);
 }
