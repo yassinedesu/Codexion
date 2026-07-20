@@ -12,7 +12,7 @@
 
 #include "codexion.h"
 
-t_dongle	take_dongle(t_coder *coder, int dongle_id)
+void    take_dongle(t_coder *coder, int dongle_id)
 {
     pthread_mutex_lock(&coder->sim->dongles[dongle_id].mutex);
     while (coder->sim->dongles[dongle_id].is_taken == 1)
