@@ -42,21 +42,21 @@ void	coder_all(t_coder *coder)
 	right_dongle = coder->coder_id % coder->sim->params->number_of_coders;
 	coder_compile(coder);
 	drop_dongle(coder, left_dongle);
-	drop_dongle(coder,right_dongle);
+	drop_dongle(coder, right_dongle);
 	coder_refactor(coder);
 	coder_debug(coder);
 }
+
 void	*coder_routine(void *arg)
 {
 	t_coder	*coder;
 	int		i;
 	int		right_dongle;
 
-
 	coder = (t_coder *)arg;
 	right_dongle = coder->coder_id % coder->sim->params->number_of_coders;
 	i = 0;
-	while(i < coder->sim->params->number_of_compiles_required)
+	while (i < coder->sim->params->number_of_compiles_required)
 	{
 		if (coder->coder_id % 2 == 0)
 		{
