@@ -35,3 +35,24 @@ void	*coder_routine(void *arg)
 	drop_dongle(coder, right_dongle);
 	return (NULL);
 }
+
+void	coder_compile(t_coder *coder)
+{
+	print_status(coder, "is compiling");
+	coder->last_compile_start = timestamp_calc(coder->sim->t_zero);
+	sleep_time(coder->sim->params->time_to_compile, coder->sim);
+	return ;
+}
+
+void	coder_refactor(t_coder *coder)
+{
+	print_status(coder, "is refactoring");
+	sleep_time(coder->sim->params->time_to_refactor, coder->sim);
+	return ;
+}
+
+void	coder_debug(t_coder *coder)
+{
+	print_status(coder, "is debugging");
+	return ;
+}
