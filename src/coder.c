@@ -15,19 +15,23 @@
 void	*coder_routine(void *arg)
 {
 	t_coder	*coder;
+	int		left_dongle;
 	int		right_dongle;
 
 	coder = (t_coder *)arg;
+	left_dongle = coder->coder_id - 1;
 	right_dongle = coder->coder_id % coder->sim->params->number_of_coders;
 	if (coder->coder_id % 2 == 0)
 	{
-		take_dongle(coder, coder->coder_id - 1);
+		take_dongle(coder, left_dongle);
 		take_dongle(coder, right_dongle);
 	}
 	else
 	{
 		take_dongle(coder, right_dongle);
-		take_dongle(coder, coder->coder_id - 1);
+		take_dongle(coder, left_dongle);
 	}
+	drop_dongle(coder, left_dongle);
+	drop_dongle(coder, right_dongle);
 	return (NULL);
 }

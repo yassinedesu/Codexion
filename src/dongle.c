@@ -24,4 +24,11 @@ void	take_dongle(t_coder *coder, int dongle_id)
 	return ;
 }
 
-void	drop_dongle(t_coder *coder, int dongle_id);
+void	drop_dongle(t_coder *coder, int dongle_id)
+{
+    pthread_mutex_lock(&coder->sim->dongles[dongle_id].mutex);
+    coder->sim->dongles[dongle_id].is_taken = 0;
+    pthread_cond_signal(&coder->sim->dongles[dongle_id].cond);
+    pthread_mutex_unlock(&coder->sim->dongles[dongle_id].mutex);
+    return ;
+}
