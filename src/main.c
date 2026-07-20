@@ -51,6 +51,5 @@ int	main(int argc, char **argv)
 	pthread_join(arg_parse->monitor, NULL);
 	mutex_cond_destroy(arg_parse, arg_parse->params->number_of_coders,
 		 arg_parse->params->number_of_coders);
-	free_all(arg_parse); // did that because I have a 105 out of 106 bytes freed only
 	return (0);
 }

@@ -26,5 +26,10 @@ void	free_all(t_sim *sim)
 		free(sim->dongles);
 		sim->dongles = NULL;
 	}
+	if (sim->params)
+	{
+    	free(sim->params);
+    	sim->params = NULL;
+	}
 	free(sim);
 }
