@@ -14,23 +14,25 @@
 
 int	main(int argc, char **argv)
 {
+	t_input	*param;
 	t_sim	*arg_parse;
 
-	if (parsed_args(argc, argv) == NULL)
+	param = parsed_args(argc, argv);
+	if (param == NULL)
 	{
 		printf("Parsing has gone wrong!\n");
 		return (-1);
 	}
-	arg_parse = init_sim(parsed_args(argc, argv));
-	if (arg_parse != NULL)
+	arg_parse = init_sim(param);
+	if (arg_parse == NULL)
 	{
 		printf("init_sim has failed!\n");
 		return (-1);
 	}
-	arg_parse = init_mutexes(arg_parse);
-	if (arg_parse != NULL)
+	arg_parse = coder_create(arg_parse);
+	if (arg_parse == NULL)
 	{
-		printf("initializing mutexes has failed!\n");
+		printf("coder_create has failed!\n");
 		return (-1);
 	}
 	coder_routine(arg_parse->coders);
