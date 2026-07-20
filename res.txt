@@ -998,3 +998,4 @@
 48 1000 has taken a dongle
 48 999 has taken a dongle
 1000 of fifo48 995 has taken a dongle
+init_sim has failed!

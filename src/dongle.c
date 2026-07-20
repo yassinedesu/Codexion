@@ -9,3 +9,8 @@
 /*   Updated: 2026/07/17 15:02:27 by yael-kha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "codexion.h"
+
+t_dongle    take_dongle(t_coder *coder, int index)
+{}
