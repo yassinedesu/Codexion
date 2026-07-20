@@ -21,5 +21,5 @@ long	timestamp_calc(struct timeval t_zero)
 	gettimeofday(&current_time, NULL);
 	cur_time = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
 	t_zero_time = (t_zero.tv_sec * 1000) + (t_zero.tv_usec / 1000);
-	return (t_zero_time - cur_time);
+	return (cur_time - t_zero_time);
 }
