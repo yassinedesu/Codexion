@@ -96,6 +96,6 @@ void					*coder_routine(void *arg);
 long					timestamp_calc(struct timeval t_zero);
 
 // cleanup.c
-void	free_all(t_sim *sim);
+void					free_all(t_sim *sim);
 
 #endif

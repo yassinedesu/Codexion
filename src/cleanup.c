@@ -28,8 +28,8 @@ void	free_all(t_sim *sim)
 	}
 	if (sim->params)
 	{
-    	free(sim->params);
-    	sim->params = NULL;
+		free(sim->params);
+		sim->params = NULL;
 	}
 	free(sim);
 }

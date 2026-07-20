@@ -12,5 +12,5 @@
 
 #include "codexion.h"
 
-t_dongle    take_dongle(t_coder *coder, int index)
+t_dongle	*take_dongle(t_coder *coder, int index)
 {}

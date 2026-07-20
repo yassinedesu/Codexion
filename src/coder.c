@@ -15,10 +15,10 @@
 void	*coder_routine(void *arg)
 {
 	t_coder	*coder;
-	int	right_dongle;
-	
+	int		right_dongle;
+
 	coder = (t_coder *)arg;
-	right_dongle = coder->coder_id % coder->sim->params->num_of_coders;
+	right_dongle = coder->coder_id % coder->sim->params->number_of_coders;
 	if (coder->coder_id % 2 == 0)
 		take_dongle(coder, coder->coder_id - 1);
 	else
