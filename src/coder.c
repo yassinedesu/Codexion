@@ -20,9 +20,15 @@ void	*coder_routine(void *arg)
 	coder = (t_coder *)arg;
 	right_dongle = coder->coder_id % coder->sim->params->number_of_coders;
 	if (coder->coder_id % 2 == 0)
+	{
 		take_dongle(coder, coder->coder_id - 1);
-	else
 		take_dongle(coder, right_dongle);
+	}
+	else
+	{
+		take_dongle(coder, right_dongle);
+		take_dongle(coder, coder->coder_id - 1);
+	}
 	print_status(coder, "has taken a dongle");
 	return (NULL);
 }
