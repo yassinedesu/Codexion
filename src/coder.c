@@ -33,14 +33,30 @@ void	coder_debug(t_coder *coder)
 	return ;
 }
 
+void	coder_all(t_coder *coder)
+{
+	int	left_dongle;
+	int	right_dongle;
+
+	left_dongle = coder->coder_id - 1;
+	right_dongle = coder->coder_id % coder->sim->params->number_of_coders;
+	coder_compile(coder);
+	drop_dongle(coder, left_dongle);
+	drop_dongle(coder,right_dongle);
+	coder_refactor(coder);
+	coder_debug(coder);
+}
 void	*coder_routine(void *arg)
 {
 	t_coder	*coder;
+	int		i;
 	int		right_dongle;
+
 
 	coder = (t_coder *)arg;
 	right_dongle = coder->coder_id % coder->sim->params->number_of_coders;
-	while(1)
+	i = 0;
+	while(i < coder->sim->params->number_of_compiles_required)
 	{
 		if (coder->coder_id % 2 == 0)
 		{
@@ -52,11 +68,8 @@ void	*coder_routine(void *arg)
 			take_dongle(coder, right_dongle);
 			take_dongle(coder, coder->coder_id - 1);
 		}
-		coder_compile(coder);
-		drop_dongle(coder, coder->coder_id - 1);
-		drop_dongle(coder, right_dongle);
-		coder_refactor(coder);
-		coder_debug(coder);
+		coder_all(coder);
+		i++;
 	}
 	return (NULL);
 }
