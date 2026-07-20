@@ -56,7 +56,7 @@ void	*coder_routine(void *arg)
 		drop_dongle(coder, coder->coder_id - 1);
 		drop_dongle(coder, right_dongle);
 		coder_refactor(coder);
+		coder_debug(coder);
 	}
-	coder_debug(coder);
 	return (NULL);
 }
