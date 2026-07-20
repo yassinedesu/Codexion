@@ -29,6 +29,5 @@ void	*coder_routine(void *arg)
 		take_dongle(coder, right_dongle);
 		take_dongle(coder, coder->coder_id - 1);
 	}
-	print_status(coder, "has taken a dongle");
 	return (NULL);
 }

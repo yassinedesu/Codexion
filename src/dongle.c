@@ -12,5 +12,14 @@
 
 #include "codexion.h"
 
-t_dongle	*take_dongle(t_coder *coder, int index)
-{}
+t_dongle	take_dongle(t_coder *coder, int dongle_id)
+{
+    pthread_mutex_lock(&coder->sim->dongles[dongle_id].mutex);
+    while (coder->sim->dongles[dongle_id].is_taken == 1)
+        pthread_cond_wait(&coder->sim->dongles[dongle_id].cond
+            , &coder->sim->dongles[dongle_id].mutex);
+    coder->sim->dongles[dongle_id].is_taken = 1;
+    print_status(coder, "has taken a dongle");
+    pthread_mutex_unlock(&coder->sim->dongles[dongle_id].mutex);
+    return ;
+}
