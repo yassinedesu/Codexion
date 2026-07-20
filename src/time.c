@@ -23,3 +23,12 @@ long	timestamp_calc(struct timeval t_zero)
 	t_zero_time = (t_zero.tv_sec * 1000) + (t_zero.tv_usec / 1000);
 	return (cur_time - t_zero_time);
 }
+
+void	sleep_time(long wait_time, t_sim *sim)
+{
+	long	start_time;
+
+	start_time = timestamp_calc(sim->t_zero);
+	while ((timestamp_calc(sim->t_zero) - start_time) < wait_time)
+		usleep(50);
+}
