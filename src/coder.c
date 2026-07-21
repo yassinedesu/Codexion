@@ -39,31 +39,17 @@ int	coder_all(t_coder *coder)
 	int	index;
 	int	left;
 	int	right;
-	int	first;
-	int	second;
 
 	index = coder->coder_id - 1;
 	left = index;
 	right = (index + 1) % coder->sim->params->number_of_coders;
-	first = left;
-	second = right;
-	if (index % 2 != 0)
-	{
-		first = right;
-		second = left;
-	}
-	if (take_dongle(coder, first))
+	if (grab_dongles(coder, left, right, index))
 		return (1);
-	if (take_dongle(coder, second))
-	{
-		drop_dongle(coder, first);
-		return (1);
-	}
 	coder_compile(coder);
 	drop_dongle(coder, left);
 	drop_dongle(coder, right);
-	coder_refactor(coder);
 	coder_debug(coder);
+	coder_refactor(coder);
 	return (0);
 }
 

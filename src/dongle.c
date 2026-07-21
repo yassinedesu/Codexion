@@ -41,6 +41,28 @@ int	take_dongle(t_coder *coder, int dongle_id)
 	return (0);
 }
 
+int	grab_dongles(t_coder *coder, int left, int right, int index)
+{
+	int	first;
+	int	second;
+
+	first = left;
+	second = right;
+	if (index % 2 != 0)
+	{
+		first = right;
+		second = left;
+	}
+	if (take_dongle(coder, first))
+		return (1);
+	if (take_dongle(coder, second))
+	{
+		drop_dongle(coder, first);
+		return (1);
+	}
+	return (0);
+}
+
 void	drop_dongle(t_coder *coder, int dongle_id)
 {
 	pthread_mutex_lock(&coder->sim->dongles[dongle_id].mutex);
