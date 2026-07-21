@@ -35,9 +35,9 @@ int	trigger_burnout(t_sim *sim, int i)
 		return (1);
 	}
 	sim->stop_flag = 1;
+	pthread_mutex_unlock(&sim->stop_mutex);
 	print_status(&sim->coders[i], "burned out");
 	wake_all_coders(sim);
-	pthread_mutex_unlock(&sim->stop_mutex);
 	return (1);
 }
 
