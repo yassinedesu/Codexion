@@ -100,7 +100,8 @@ void					sleep_time(long wait_time, t_sim *sim);
 void					free_all(t_sim *sim);
 
 // dongles.c
-void					take_dongle(t_coder *coder, int dongle_id);
+int					take_dongle(t_coder *coder, int dongle_id);
 void					drop_dongle(t_coder *coder, int dongle_id);
+int						grab_dongles(t_coder *coder, int left, int right, int index);
 
 #endif
