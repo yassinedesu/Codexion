@@ -12,6 +12,20 @@
 
 #include "codexion.h"
 
+void	wake_all_coders(t_sim *sim)
+{
+	int	i;
+
+	i = 0;
+	while (i < sim->params->number_of_coders)
+	{
+		pthread_mutex_lock(&sim->dongles[i].mutex);
+		pthread_cond_broadcast(&sim->dongles[i].cond);
+		pthread_mutex_unlock(&sim->dongles[i].mutex);
+		i++;
+	}
+}
+
 void	*monitor_routine(void *arg)
 {
 	t_sim	*sim;
@@ -19,12 +33,12 @@ void	*monitor_routine(void *arg)
 	int		last_comp;
 
 	sim = (t_sim *)arg;
-	last_comp = sim->params->time_to_burnout;
 	while (1)
 	{
 		i = 0;
 		while (i < sim->params->number_of_coders)
 		{
+			last_comp = sim->coders[i].last_compile_start;
 			if (timestamp_calc(sim->t_zero) - last_comp 
 				>= sim->params->time_to_burnout)
 			{
@@ -32,15 +46,17 @@ void	*monitor_routine(void *arg)
 				if (sim->stop_flag == 1)
 				{
 					pthread_mutex_unlock(&sim->stop_mutex);
-					break;
+					return (NULL);
 				}
 				sim->stop_flag = 1;
 				print_status(&sim->coders[i], "burned out");
-				// idk what helper function you're talking about
+				wake_all_coders(sim);
+				pthread_mutex_unlock(&sim->stop_mutex);
+				return (NULL);
 			}
 			i++;
 		}
-		pthread_mutex_unlock(&sim->stop_mutex);
+		usleep(1000);
 	}
 	return (NULL);
 }
