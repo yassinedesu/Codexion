@@ -25,8 +25,8 @@ t_dongle	*init_dongles(t_sim *sims)
 	while (i < sims->params->number_of_coders)
 	{
 		dongles[i].id = i;
-		dongles[i].is_taken = false;
-		dongles[i].last_time_used = 0;
+        dongles[i].is_taken = false;
+        dongles[i].last_time_used = -sims->params->dongle_cooldown;
 		i++;
 	}
 	return (dongles);

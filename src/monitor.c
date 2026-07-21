@@ -44,14 +44,20 @@ int trigger_burnout(t_sim *sim, int i)
 int check_coder(t_sim *sim, int i, int *finished)
 {
     int last_comp;
+    int is_done;
 
+    is_done = 0;
     pthread_mutex_lock(&sim->stop_mutex);
     last_comp = sim->coders[i].last_compile_start;
     if (sim->params->number_of_compiles_required != -1 &&
         sim->coders[i].number_of_compiles >= sim->params->number_of_compiles_required)
+    {
         (*finished)++;
+        is_done = 1;
+    }
     pthread_mutex_unlock(&sim->stop_mutex);
-    if (timestamp_calc(sim->t_zero) - last_comp >= sim->params->time_to_burnout)
+    if (is_done == 0 && timestamp_calc(sim->t_zero)
+        - last_comp >= sim->params->time_to_burnout)
         return (trigger_burnout(sim, i));
     return (0);
 }
