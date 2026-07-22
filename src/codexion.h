@@ -118,5 +118,7 @@ int						take_dongle(t_coder *coder, int dongle_id);
 void					drop_dongle(t_coder *coder, int dongle_id);
 int						grab_dongles(t_coder *coder, int left, int right,
 							int index);
+// heap.c
+t_heap					*init_heap(int cap);
 
 #endif
