@@ -23,3 +23,5 @@ long    get_priority(t_coder *coder)
     pthread_mutex_unlock(&coder->sim->stop_mutex);
     return (last_compile + coder->sim->params->time_to_burnout);
 }
+
+// why ?
