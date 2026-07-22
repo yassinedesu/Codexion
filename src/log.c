@@ -20,8 +20,8 @@ void	print_status(t_coder *coder, char *status)
 	pthread_mutex_lock(&coder->sim->stop_mutex);
 	if (coder->sim->stop_flag == 1 && strcmp(status, "burned out") != 0)
 	{
-		pthreat_mutex_unlock(&coder->sim-stop_mutex);
-		pthreat_mutex_unlock(&coder->sim-log_mutex);
+		pthread_mutex_unlock(&coder->sim->stop_mutex);
+		pthread_mutex_unlock(&coder->sim->log_mutex);
 		return ;
 	}
 	pthread_mutex_unlock(&coder->sim->stop_mutex);
