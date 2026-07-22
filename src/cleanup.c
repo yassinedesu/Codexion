@@ -12,6 +12,22 @@
 
 #include "codexion.h"
 
+void	free_queue(t_sim *sim)
+{
+	int	i;
+
+	i = 0;
+	while (i < sim->params->number_of_coders)
+	{
+		if (sim->dongles[i].wait_queue)
+		{
+			free(sim->dongles[i].wait_queue->array);
+			free(sim->dongles[i].wait_queue);
+		}
+		i++;
+	}
+}
+
 void	free_all(t_sim *sim)
 {
 	if (!sim)
@@ -21,6 +37,7 @@ void	free_all(t_sim *sim)
 		free(sim->coders);
 		sim->coders = NULL;
 	}
+	free_queue(sim);
 	if (sim->dongles)
 	{
 		free(sim->dongles);

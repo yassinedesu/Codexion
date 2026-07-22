@@ -24,6 +24,9 @@ t_dongle	*init_dongles(t_sim *sims)
 	i = 0;
 	while (i < sims->params->number_of_coders)
 	{
+		dongles[i].wait_queue = init_heap(sims->params->number_of_coders);
+		if (!dongles[i].wait_queue)
+			return (NULL);
 		dongles[i].id = i;
 		dongles[i].is_taken = false;
 		dongles[i].last_time_used = -sims->params->dongle_cooldown;
