@@ -34,7 +34,7 @@ t_heap	*init_heap(int cap)
 
 t_heap	*heap_push(t_heap *heaps, int curr, long prior)
 {
-	int	curr;
+	int	c_id;
 	int	parent;
 	t_node	tmp;
 
@@ -45,12 +45,12 @@ t_heap	*heap_push(t_heap *heaps, int curr, long prior)
 	while (curr > 0)
 	{
 		parent = (curr - 1) / 2;
-		if (heaps->array[curr].priority < heaps->array[parent].priority)
+		if (heaps->array[c_id].priority < heaps->array[parent].priority)
 		{
-			tmp = heaps->array[curr];
-			heaps->array[curr] = heaps->array[parent];
+			tmp = heaps->array[c_id];
+			heaps->array[c_id] = heaps->array[parent];
 			heaps->array[parent] = tmp;
-			curr = parent;
+			c_id = parent;
 		}
 		else
 			break ;
@@ -63,8 +63,9 @@ void	poper_helper(t_heap *heaps, int current, int left, int right)
 	int		small;
 	t_node	node;
 
-	while (1)
+    while (1)
 	{
+        small = current;
         left = 2 * current + 1;
 		right = 2 * current + 2;
 		if (left < heaps->size
@@ -78,9 +79,9 @@ void	poper_helper(t_heap *heaps, int current, int left, int right)
             node = heaps->array[small];
 			heaps->array[small] = heaps->array[current];
 			heaps->array[current] = node;
-            small = current;
+            current = small;
 		}
-		if (small == current)
+		else
 			break ;
 	}
 }
