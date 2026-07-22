@@ -14,12 +14,22 @@
 
 // creating init_heap, heap_push & heap_pop
 
-t_heap  *init_heap(int cap)
-{
-    t_heap  *heap;
+// Create an init_heap function that accepts an integer for capacity. It should allocate
+// the t_heap structure, allocate the internal t_node array based on that capacity,
+// set the size to 0, and return the allocated heap pointer.
 
-    heap = malloc(sizeof(t_heap) * cap);
-    if (!heap)
+t_heap	*init_heap(int cap)
+{
+    t_node  *node;
+	t_heap	*heaps;
+
+	heaps = malloc(sizeof(t_heap));
+	if (!heaps)
+		return (NULL);
+    node = malloc(sizeof(t_node) * cap);
+    if (!node)
         return (NULL);
-    return (heap);
+    heap->array = node;
+    heaps->size = 0;
+	return (heaps);
 }
