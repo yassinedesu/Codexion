@@ -91,7 +91,6 @@ void	heap_pop(t_heap *heaps)
 	int		current;
 	int		left;
 	int		right;
-	t_node	*node;
 
 	current = 0;
 	left = 0;
