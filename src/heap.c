@@ -32,12 +32,18 @@ t_heap	*init_heap(int cap)
 	return (heaps);
 }
 
+void	heap_push_helper(t_heap *heaps, int c_id, int curr, int prior)
+{
+}
+
 t_heap	*heap_push(t_heap *heaps, int curr, long prior)
 {
 	int		c_id;
 	int		parent;
 	t_node	tmp;
 
+	if (heaps->size >= heaps->capacity)
+		return (heaps);
 	heaps->array[heaps->size].coder_id = curr;
 	heaps->array[heaps->size].priority = prior;
 	heaps->size++;
