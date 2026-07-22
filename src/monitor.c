@@ -45,12 +45,13 @@ int	check_coder(t_sim *sim, int i, int *finished)
 {
 	long	last_comp;
 	int		is_done;
+	int		num_compiles;
 
 	is_done = 0;
+	num_compiles = sim->params->number_of_compiles_required;
 	pthread_mutex_lock(&sim->stop_mutex);
 	last_comp = sim->coders[i].last_compile_start;
-	if (sim->coders[i].number_of_compiles >=
-		sim->params->number_of_compiles_required)
+	if (sim->coders[i].number_of_compiles >= num_compiles)
 	{
 		(*finished)++;
 		is_done = 1;

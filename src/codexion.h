@@ -37,6 +37,19 @@ typedef struct s_input
 
 typedef struct s_sim	t_sim;
 
+typedef struct s_node
+{
+	int					coder_id;
+	long				priority;
+}						t_node;
+
+typedef struct s_heap
+{
+	t_node				*array;
+	int					size;
+	int					capacity;
+}						t_heap;
+
 typedef struct s_coder
 {
 	pthread_t			thread;
@@ -53,6 +66,7 @@ typedef struct s_dongle
 	bool				is_taken;
 	long				last_time_used;
 	pthread_cond_t		cond;
+	t_heap				*wait_queue;
 }						t_dongle;
 
 typedef struct s_sim
