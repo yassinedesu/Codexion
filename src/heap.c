@@ -40,8 +40,18 @@ t_heap	*init_heap(int cap)
 }
 t_heap  *heap_push(t_heap *heaps, int c_id, long prior)
 {
-    while (heaps->size < heaps->capacity)
-    {
+    int i;
+    int j;
 
+    i = 0;
+    heaps->array[heaps->size].coder_id = c_id;
+    heaps->array[heaps->size].priority = prior;
+    heaps->size++;
+    while (i < heaps->size)
+    {
+        j = i + 1;
+        while (j < heaps->size)
+        {
+        }
     }
 }
