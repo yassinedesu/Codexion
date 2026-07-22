@@ -12,7 +12,7 @@
 
 #include "codexion.h"
 
-void	wake_all_coders(t_sim *sim)
+static void	wake_all_coders(t_sim *sim)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ void	wake_all_coders(t_sim *sim)
 	}
 }
 
-int	trigger_burnout(t_sim *sim, int i)
+static int	trigger_burnout(t_sim *sim, int i)
 {
 	pthread_mutex_lock(&sim->stop_mutex);
 	if (sim->stop_flag == 1)
@@ -41,7 +41,7 @@ int	trigger_burnout(t_sim *sim, int i)
 	return (1);
 }
 
-int	check_coder(t_sim *sim, int i, int *finished)
+static int	check_coder(t_sim *sim, int i, int *finished)
 {
 	long	last_comp;
 	int		is_done;
@@ -63,7 +63,7 @@ int	check_coder(t_sim *sim, int i, int *finished)
 	return (0);
 }
 
-int	check_success(t_sim *sim, int finished)
+static int	check_success(t_sim *sim, int finished)
 {
 	if (finished == sim->params->number_of_coders)
 	{

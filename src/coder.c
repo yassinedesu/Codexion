@@ -12,7 +12,7 @@
 
 #include "codexion.h"
 
-void	coder_compile(t_coder *coder)
+static void	coder_compile(t_coder *coder)
 {
 	print_status(coder, "is compiling");
 	pthread_mutex_lock(&coder->sim->stop_mutex);
@@ -23,21 +23,21 @@ void	coder_compile(t_coder *coder)
 	return ;
 }
 
-void	coder_refactor(t_coder *coder)
+static void	coder_refactor(t_coder *coder)
 {
 	print_status(coder, "is refactoring");
 	sleep_time(coder->sim->params->time_to_refactor, coder->sim);
 	return ;
 }
 
-void	coder_debug(t_coder *coder)
+static void	coder_debug(t_coder *coder)
 {
 	print_status(coder, "is debugging");
 	sleep_time(coder->sim->params->time_to_debug, coder->sim);
 	return ;
 }
 
-int	coder_all(t_coder *coder)
+static int	coder_all(t_coder *coder)
 {
 	int	index;
 	int	left;

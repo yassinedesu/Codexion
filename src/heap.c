@@ -60,7 +60,7 @@ t_heap	*heap_push(t_heap *heaps, long c_id, long prior)
 	return (heaps);
 }
 
-void	poper_helper(t_heap *heaps, int current, int left, int right)
+static void	poper_helper(t_heap *heaps, int current, int left, int right)
 {
 	int		small;
 	t_node	node;

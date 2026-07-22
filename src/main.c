@@ -12,35 +12,46 @@
 
 #include "codexion.h"
 
-int	main(int argc, char **argv)
+t_sim	*check_conditions(int argc, char **argv)
 {
 	t_input	*param;
 	t_sim	*arg_parse;
-	int		i;
 
 	param = parsed_args(argc, argv);
 	if (param == NULL)
 	{
-		printf("Parsing has gone wrong!\n");
-		return (-1);
+		printf("Error\nParsing has gone wrong!\n");
+		return (NULL);
 	}
 	arg_parse = init_sim(param);
 	if (arg_parse == NULL)
 	{
+		free(param);
 		printf("init_sim has failed!\n");
-		return (-1);
+		return (NULL);
 	}
 	arg_parse = init_mutexes(arg_parse);
 	if (arg_parse == NULL)
 	{
 		printf("init_mutex has failed!\n");
-		return (-1);
+		return (NULL);
 	}
+	return (arg_parse);
+}
+
+int	main(int argc, char **argv)
+{
+	t_sim	*arg_parse;
+	int		i;
+
+	arg_parse = check_conditions(argc, argv);
+	if (!arg_parse)
+		return (1);
 	arg_parse = coder_create(arg_parse);
 	if (arg_parse == NULL)
 	{
 		printf("coder_create has failed!\n");
-		return (-1);
+		return (1);
 	}
 	i = 0;
 	while (i < arg_parse->params->number_of_coders)
@@ -50,6 +61,6 @@ int	main(int argc, char **argv)
 	}
 	pthread_join(arg_parse->monitor, NULL);
 	mutex_cond_destroy(arg_parse, arg_parse->params->number_of_coders,
-			arg_parse->params->number_of_coders);
+		arg_parse->params->number_of_coders);
 	return (0);
 }

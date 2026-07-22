@@ -12,7 +12,7 @@
 
 #include "codexion.h"
 
-int	check_stop(t_coder *coder, t_dongle *dongle)
+static int	check_stop(t_coder *coder, t_dongle *dongle)
 {
 	pthread_mutex_lock(&coder->sim->stop_mutex);
 	if (coder->sim->stop_flag == 1)
@@ -25,7 +25,7 @@ int	check_stop(t_coder *coder, t_dongle *dongle)
 	return (0);
 }
 
-int	is_taken_condition(t_coder *coder, t_dongle *dongle)
+static int	is_taken_condition(t_coder *coder, t_dongle *dongle)
 {
 	long	now;
 	long	cd;
@@ -54,7 +54,7 @@ int	is_taken_condition(t_coder *coder, t_dongle *dongle)
 	return (0);
 }
 
-int	take_dongle(t_coder *coder, int dongle_id)
+static int	take_dongle(t_coder *coder, int dongle_id)
 {
 	t_dongle	*dongle;
 	int			returned;

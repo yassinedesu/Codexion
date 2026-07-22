@@ -97,7 +97,6 @@ void					*mutex_cond_destroy(t_sim *sims, int index1,
 							int index2);
 
 // threads.c
-void					*spawn_fail(t_sim *sims, int running_threads);
 t_sim					*coder_create(t_sim *sims);
 
 // log.c
@@ -111,10 +110,10 @@ long					timestamp_calc(struct timeval t_zero);
 void					sleep_time(long wait_time, t_sim *sim);
 
 // cleanup.c
+void					free_queue(t_sim *sim);
 void					free_all(t_sim *sim);
 
 // dongles.c
-int						take_dongle(t_coder *coder, int dongle_id);
 void					drop_dongle(t_coder *coder, int dongle_id);
 int						grab_dongles(t_coder *coder, int left, int right,
 							int index);

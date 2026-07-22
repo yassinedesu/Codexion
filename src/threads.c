@@ -12,7 +12,7 @@
 
 #include "codexion.h"
 
-void	*spawn_fail(t_sim *sims, int running_threads)
+static void	*spawn_fail(t_sim *sims, int running_threads)
 {
 	int	j;
 
