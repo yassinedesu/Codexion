@@ -34,8 +34,8 @@ t_heap	*init_heap(int cap)
 
 t_heap	*heap_push(t_heap *heaps, int curr, long prior)
 {
-	int	c_id;
-	int	parent;
+	int		c_id;
+	int		parent;
 	t_node	tmp;
 
 	heaps->array[heaps->size].coder_id = curr;
@@ -63,23 +63,23 @@ void	poper_helper(t_heap *heaps, int current, int left, int right)
 	int		small;
 	t_node	node;
 
-    while (1)
+	while (1)
 	{
-        small = current;
-        left = 2 * current + 1;
+		small = current;
+		left = 2 * current + 1;
 		right = 2 * current + 2;
 		if (left < heaps->size
 			&& heaps->array[left].priority < heaps->array[small].priority)
 			small = left;
-            if (right < heaps->size
-                && heaps->array[right].priority < heaps->array[small].priority)
+		if (right < heaps->size
+			&& heaps->array[right].priority < heaps->array[small].priority)
 			small = right;
 		if (small != current)
 		{
-            node = heaps->array[small];
+			node = heaps->array[small];
 			heaps->array[small] = heaps->array[current];
 			heaps->array[current] = node;
-            current = small;
+			current = small;
 		}
 		else
 			break ;
@@ -88,9 +88,9 @@ void	poper_helper(t_heap *heaps, int current, int left, int right)
 
 void	heap_pop(t_heap *heaps)
 {
-	int		current;
-	int		left;
-	int		right;
+	int	current;
+	int	left;
+	int	right;
 
 	current = 0;
 	left = 0;
