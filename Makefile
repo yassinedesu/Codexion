@@ -15,7 +15,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 %.o: %.c
-	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 -include $(DEPS)
 
