@@ -12,13 +12,10 @@
 
 #include "codexion.h"
 
-int	take_dongle(t_coder *coder, int dongle_id)
+int	is_taken_condition(t_coder *coder, t_dongle *dongle)
 {
-	t_dongle	*dongle;
 	long		now;
 
-	dongle = &coder->sim->dongles[dongle_id];
-	pthread_mutex_lock(&dongle->mutex);
 	while (1)
 	{
 		pthread_mutex_lock(&coder->sim->stop_mutex);
@@ -30,11 +27,30 @@ int	take_dongle(t_coder *coder, int dongle_id)
 		}
 		pthread_mutex_unlock(&coder->sim->stop_mutex);
 		now = timestamp_calc(coder->sim->t_zero);
-		if (dongle->is_taken == 0 && now >= dongle->last_time_used
-			+ coder->sim->params->dongle_cooldown)
-			break ;
+		if (dongle->is_taken == 0)
+		{
+			if (now >= dongle->last_time_used + coder->sim->params->dongle_cooldown)
+				break;
+			pthread_mutex_unlock(&dongle->mutex);
+			usleep(50);
+			pthread_mutex_lock(&dongle->mutex);
+			continue;
+		}
 		pthread_cond_wait(&dongle->cond, &dongle->mutex);
 	}
+	return (0);
+}
+
+int	take_dongle(t_coder *coder, int dongle_id)
+{
+	t_dongle	*dongle;
+	int			returned;
+
+	dongle = &coder->sim->dongles[dongle_id];
+	pthread_mutex_lock(&dongle->mutex);
+	returned = is_taken_condition(coder, dongle);
+	if (returned == 1)
+		return (1);
 	dongle->is_taken = 1;
 	print_status(coder, "has taken a dongle");
 	pthread_mutex_unlock(&dongle->mutex);
