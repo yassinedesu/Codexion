@@ -12,17 +12,6 @@
 
 #include "codexion.h"
 
-// creating init_heap, heap_push & heap_pop
-
-/*Create a heap_push function that takes the heap pointer, the coder_id,
-	and a long for priority.
-  Insert the new node's data at the index of the current size,
-	then increment the size. To sort it,
-  write a while loop that compares this new node against its parent
-  (found at index (current_index - 1)
-	/ 2). If the new node has a smaller priority, swap them.
-  Keep bubbling up until it hits the root or is no longer smaller than its parent.*/
-
 t_heap	*init_heap(int cap)
 {
 	t_node	*node;
@@ -43,25 +32,25 @@ t_heap	*init_heap(int cap)
 	return (heaps);
 }
 
-t_heap	*heap_push(t_heap *heaps, int c_id, long prior)
+t_heap	*heap_push(t_heap *heaps, int curr, long prior)
 {
-	int	c_id;
-	int	p_id;
-	int	i;
+	int	curr;
+	int	parent;
+	t_node	tmp;
 
-	heaps->array[heaps->size].coder_id = c_id;
+	heaps->array[heaps->size].coder_id = curr;
 	heaps->array[heaps->size].priority = prior;
 	heaps->size++;
-	c_id = heaps->size - 1;
-	while (c_id > 0)
+	curr = heaps->size - 1;
+	while (curr > 0)
 	{
-		p_id = (c_id - 1) / 2;
-		if (heaps->array[c_id].priority < heaps->array[p_id].priority)
+		parent = (curr - 1) / 2;
+		if (heaps->array[curr].priority < heaps->array[parent].priority)
 		{
-			i = heaps->array[c_id].priority;
-			heaps->array[c_id].priority = heaps->array[p_id].priority;
-			heaps->array[p_id].priority = i;
-			c_id = p_id;
+			tmp = heaps->array[curr];
+			heaps->array[curr] = heaps->array[parent];
+			heaps->array[parent] = tmp;
+			curr = parent;
 		}
 		else
 			break ;
@@ -71,26 +60,25 @@ t_heap	*heap_push(t_heap *heaps, int c_id, long prior)
 
 void	poper_helper(t_heap *heaps, int current, int left, int right)
 {
-
 	int		small;
-	t_node	*node;
+	t_node	node;
 
-    while (1)
+	while (1)
 	{
-		small = current;
-		left = 2 * current + 1;
+        left = 2 * current + 1;
 		right = 2 * current + 2;
 		if (left < heaps->size
 			&& heaps->array[left].priority < heaps->array[small].priority)
 			small = left;
-		if (right < heaps->size
-			&& heaps->array[right].priority < heaps->array[small].priority)
+            if (right < heaps->size
+                && heaps->array[right].priority < heaps->array[small].priority)
 			small = right;
 		if (small != current)
 		{
-			node = &heaps->array[small];
+            node = heaps->array[small];
 			heaps->array[small] = heaps->array[current];
-			heaps->array[current] = *node;
+			heaps->array[current] = node;
+            small = current;
 		}
 		if (small == current)
 			break ;
@@ -105,8 +93,8 @@ void	heap_pop(t_heap *heaps)
 	t_node	*node;
 
 	current = 0;
-    left = 0;
-    right = 0;
+	left = 0;
+	right = 0;
 	if (heaps->size == 0)
 		return ;
 	heaps->array[0] = heaps->array[heaps->size - 1];
