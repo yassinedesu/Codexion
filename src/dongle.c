@@ -29,7 +29,6 @@ int	is_taken_condition(t_coder *coder, t_dongle *dongle)
 {
 	long	now;
 	long	cd;
-	long	prior;
 
 	cd = coder->sim->params->dongle_cooldown;
 	heap_push(dongle->wait_queue, coder->coder_id, get_priority(coder));
