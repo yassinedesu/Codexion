@@ -16,7 +16,7 @@ long	get_priority(t_coder *coder)
 {
 	long	last_compile;
 
-	if (strcmp(coder->sim->params->scheduler, "fifo"))
+	if (strcmp(coder->sim->params->scheduler, "fifo") == 0)
 		return (timestamp_calc(coder->sim->t_zero));
 	pthread_mutex_lock(&coder->sim->stop_mutex);
 	last_compile = coder->last_compile_start;
