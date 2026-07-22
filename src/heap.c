@@ -34,7 +34,7 @@ t_heap	*init_heap(int cap)
         free(heaps);
         return (NULL);
     }
-    heap->array = node;
+    heaps->array = node;
     heaps->size = 0;
 	return (heaps);
 }
