@@ -50,6 +50,6 @@ int	main(int argc, char **argv)
 	}
 	pthread_join(arg_parse->monitor, NULL);
 	mutex_cond_destroy(arg_parse, arg_parse->params->number_of_coders,
-		arg_parse->params->number_of_coders);
+			arg_parse->params->number_of_coders);
 	return (0);
 }
