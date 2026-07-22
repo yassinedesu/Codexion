@@ -36,22 +36,31 @@ t_heap	*init_heap(int cap)
     }
     heaps->array = node;
     heaps->size = 0;
+    heaps->capacity = cap;
 	return (heaps);
 }
+
 t_heap  *heap_push(t_heap *heaps, int c_id, long prior)
 {
+    int current_id;
+    int parent_id;
     int i;
-    int j;
 
-    i = 0;
     heaps->array[heaps->size].coder_id = c_id;
     heaps->array[heaps->size].priority = prior;
     heaps->size++;
-    while (i < heaps->size)
+    current_id = heaps->size - 1;
+    while (current_id > 0)
     {
-        j = i + 1;
-        while (j < heaps->size)
+        parent_id = (current_id - 1) / 2;
+        if (current_id > parent_id)
         {
+            i = current_id;
+            current_id = parent_id;
+            parent_id = i;
         }
+        else
+            break;
     }
+    return (heaps);
 }
