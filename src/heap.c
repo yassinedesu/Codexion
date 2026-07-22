@@ -11,3 +11,15 @@
 /* ************************************************************************** */
 
 #include "codexion.h"
+
+// creating init_heap, heap_push & heap_pop
+
+t_heap  *init_heap(int cap)
+{
+    t_heap  *heap;
+
+    heap = malloc(sizeof(t_heap) * cap);
+    if (!heap)
+        return (NULL);
+    return (heap);
+}
