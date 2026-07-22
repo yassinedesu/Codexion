@@ -26,7 +26,7 @@ void	*spawn_fail(t_sim *sims, int running_threads)
 		j++;
 	}
 	mutex_cond_destroy(sims, sims->params->number_of_coders,
-		sims->params->number_of_coders);
+			sims->params->number_of_coders);
 	return (NULL);
 }
 

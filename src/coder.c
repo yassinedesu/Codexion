@@ -12,15 +12,15 @@
 
 #include "codexion.h"
 
-void    coder_compile(t_coder *coder)
+void	coder_compile(t_coder *coder)
 {
-    print_status(coder, "is compiling");
-    pthread_mutex_lock(&coder->sim->stop_mutex);
-    coder->last_compile_start = timestamp_calc(coder->sim->t_zero);
-    coder->number_of_compiles++;
-    pthread_mutex_unlock(&coder->sim->stop_mutex);
-    sleep_time(coder->sim->params->time_to_compile, coder->sim);
-    return ;
+	print_status(coder, "is compiling");
+	pthread_mutex_lock(&coder->sim->stop_mutex);
+	coder->last_compile_start = timestamp_calc(coder->sim->t_zero);
+	coder->number_of_compiles++;
+	pthread_mutex_unlock(&coder->sim->stop_mutex);
+	sleep_time(coder->sim->params->time_to_compile, coder->sim);
+	return ;
 }
 
 void	coder_refactor(t_coder *coder)
