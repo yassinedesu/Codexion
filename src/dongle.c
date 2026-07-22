@@ -29,14 +29,17 @@ int	is_taken_condition(t_coder *coder, t_dongle *dongle)
 {
 	long	now;
 	long	cd;
+	long	prior;
 
 	cd = coder->sim->params->dongle_cooldown;
+	heap_push(dongle->wait_queue, coder->coder_id, get_priority(coder));
 	while (1)
 	{
 		if (check_stop(coder, dongle))
 			return (1);
 		now = timestamp_calc(coder->sim->t_zero);
-		if (dongle->is_taken == 0)
+		if (dongle->is_taken == 0
+			&& dongle->wait_queue->array[0].coder_id == coder->coder_id)
 		{
 			if (now >= dongle->last_time_used + cd)
 				break ;
@@ -47,6 +50,7 @@ int	is_taken_condition(t_coder *coder, t_dongle *dongle)
 		}
 		pthread_cond_wait(&dongle->cond, &dongle->mutex);
 	}
+	heap_pop(dongle->wait_queue);
 	return (0);
 }
 
