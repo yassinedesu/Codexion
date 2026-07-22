@@ -43,14 +43,14 @@ int trigger_burnout(t_sim *sim, int i)
 
 int check_coder(t_sim *sim, int i, int *finished)
 {
-    int last_comp;
-    int is_done;
+    long	last_comp;
+    int	is_done;
 
     is_done = 0;
     pthread_mutex_lock(&sim->stop_mutex);
     last_comp = sim->coders[i].last_compile_start;
-    if (sim->params->number_of_compiles_required != -1 &&
-        sim->coders[i].number_of_compiles >= sim->params->number_of_compiles_required)
+    if (sim->coders[i].number_of_compiles >= 
+		sim->params->number_of_compiles_required)
     {
         (*finished)++;
         is_done = 1;
@@ -64,8 +64,7 @@ int check_coder(t_sim *sim, int i, int *finished)
 
 int check_success(t_sim *sim, int finished)
 {
-    if (sim->params->number_of_compiles_required != -1 &&
-        finished == sim->params->number_of_coders)
+    if (finished == sim->params->number_of_coders)
     {
         pthread_mutex_lock(&sim->stop_mutex);
         sim->stop_flag = 1;
