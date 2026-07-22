@@ -38,6 +38,7 @@ int	is_taken_condition(t_coder *coder, t_dongle *dongle)
 			return (1);
 		now = timestamp_calc(coder->sim->t_zero);
 		if (dongle->is_taken == 0
+			&& dongle->wait_queue->size > 0
 			&& dongle->wait_queue->array[0].coder_id == coder->coder_id)
 		{
 			if (now >= dongle->last_time_used + cd)
