@@ -42,22 +42,23 @@ t_heap	*init_heap(int cap)
 
 t_heap  *heap_push(t_heap *heaps, int c_id, long prior)
 {
-    int current_id;
-    int parent_id;
+    int c_id;
+    int p_id;
     int i;
 
     heaps->array[heaps->size].coder_id = c_id;
     heaps->array[heaps->size].priority = prior;
     heaps->size++;
-    current_id = heaps->size - 1;
-    while (current_id > 0)
+    c_id = heaps->size - 1;
+    while (c_id > 0)
     {
-        parent_id = (current_id - 1) / 2;
-        if (current_id > parent_id)
+        p_id = (c_id - 1) / 2;
+        if (heaps->array[c_id].priority < heaps->array[p_id].priority)
         {
-            i = current_id;
-            current_id = parent_id;
-            parent_id = i;
+            i = heaps->array[c_id].priority;
+            heaps->array[c_id].priority = heaps->array[p_id].priority;
+            heaps->array[p_id].priority = i;
+            c_id = p_id;
         }
         else
             break;
