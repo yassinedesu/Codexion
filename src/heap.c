@@ -32,10 +32,6 @@ t_heap	*init_heap(int cap)
 	return (heaps);
 }
 
-// void	heap_push_helper(t_heap *heaps, int c_id, int curr, int prior)
-// {
-// }
-
 t_heap	*heap_push(t_heap *heaps, long c_id, long prior)
 {
 	int		curr;

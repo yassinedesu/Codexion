@@ -30,5 +30,5 @@ void	sleep_time(long wait_time, t_sim *sim)
 
 	start_time = timestamp_calc(sim->t_zero);
 	while ((timestamp_calc(sim->t_zero) - start_time) < wait_time)
-		usleep(50); /* to prevent the loop from consumming 100% of CPU */
+		usleep(50);
 }
