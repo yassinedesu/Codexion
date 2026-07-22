@@ -39,7 +39,7 @@ typedef struct s_sim	t_sim;
 
 typedef struct s_node
 {
-	int					coder_id;
+	long				coder_id;
 	long				priority;
 }						t_node;
 
@@ -120,7 +120,7 @@ int						grab_dongles(t_coder *coder, int left, int right,
 							int index);
 // heap.c
 t_heap					*init_heap(int cap);
-t_heap					*heap_push(t_heap *heaps, int curr, long prior);
+t_heap					*heap_push(t_heap *heaps, long curr, long prior);
 void					heap_pop(t_heap *heaps);
 
 // sched.c
