@@ -72,7 +72,7 @@ static int	check_inputs(t_input *data)
 	if (data->number_of_coders <= 0 || data->time_to_burnout <= 0
 		|| data->time_to_compile <= 0 || data->time_to_debug <= 0
 		|| data->time_to_refactor <= 0 || data->number_of_compiles_required <= 0
-		|| data->dongle_cooldown <= 0 || data->scheduler == NULL)
+		|| data->dongle_cooldown < 0 || data->scheduler == NULL)
 		return (-1);
 	return (0);
 }
