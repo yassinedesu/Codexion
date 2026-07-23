@@ -12,11 +12,28 @@
 
 #include "codexion.h"
 
+t_dongle	*free_partial_heaps(t_dongle *dongles, int count)
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		free(dongles[i].wait_queue->array);
+		free(dongles[i].wait_queue);
+		i++;
+	}
+	free(dongles);
+	return (NULL);
+}
+
 void	free_queue(t_sim *sim)
 {
 	int	i;
 
 	i = 0;
+	if (!sim || !sim->dongles)
+		return ;
 	while (i < sim->params->number_of_coders)
 	{
 		if (sim->dongles[i].wait_queue)

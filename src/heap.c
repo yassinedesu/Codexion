@@ -12,6 +12,13 @@
 
 #include "codexion.h"
 
+static int	is_higher(t_node a, t_node b)
+{
+	if (a.priority != b.priority)
+		return (a.priority < b.priority);
+	return (a.coder_id < b.coder_id);
+}
+
 t_heap	*init_heap(int cap)
 {
 	t_node	*node;
@@ -47,7 +54,7 @@ t_heap	*heap_push(t_heap *heaps, long c_id, long prior)
 	while (curr > 0)
 	{
 		parent = (curr - 1) / 2;
-		if (heaps->array[curr].priority < heaps->array[parent].priority)
+		if (is_higher(heaps->array[curr], heaps->array[parent]))
 		{
 			tmp = heaps->array[curr];
 			heaps->array[curr] = heaps->array[parent];
@@ -70,11 +77,11 @@ static void	poper_helper(t_heap *heaps, int current, int left, int right)
 		small = current;
 		left = 2 * current + 1;
 		right = 2 * current + 2;
-		if (left < heaps->size
-			&& heaps->array[left].priority < heaps->array[small].priority)
+		if (left < heaps->size && is_higher(heaps->array[left],
+				heaps->array[small]))
 			small = left;
-		if (right < heaps->size
-			&& heaps->array[right].priority < heaps->array[small].priority)
+		if (right < heaps->size && is_higher(heaps->array[right],
+				heaps->array[small]))
 			small = right;
 		if (small != current)
 		{

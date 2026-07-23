@@ -110,6 +110,7 @@ long					timestamp_calc(struct timeval t_zero);
 void					sleep_time(long wait_time, t_sim *sim);
 
 // cleanup.c
+t_dongle				*free_partial_heaps(t_dongle *dongles, int count);
 void					free_queue(t_sim *sim);
 void					free_all(t_sim *sim);
 
